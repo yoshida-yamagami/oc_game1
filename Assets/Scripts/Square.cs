@@ -1,81 +1,45 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    /// <summary>
-    /// 移動するスピード。□はスピードにしたがって一定方向に進む
-    /// </summary>
+    [SerializeField] GameObject body;
+    [SerializeField] SquareBody bodyScript;
     [SerializeField] Vector2 speed = Vector2.zero;
+    [SerializeField] Vector2 size = new Vector2(1, 1);
     [SerializeField] bool autoStart = false; // ゲーム開始直後に動き出すか否か（trueなら動く、falseなら動かない）
     [SerializeField] bool canTriggerMove = true; // 始動用当たり判定にプレイヤーが入ってきたら動き出すか否か（trueなら動く、falseなら動かない）
-    [SerializeField] BoxCollider2D canMoveTrigger;
-
-    private GameObject parent;
-    private bool isMove = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // 親オブジェクトを取得
-        parent = transform.parent.gameObject;
-
-        // autoStart = trueの場合、ゲーム開始直後にすぐ動き出す
-        // autoStart = falseの場合、ゲーム開始時は止まった状態
-        if (autoStart)
-        {
-            isMove = true;
-        }
-
-        // canTriggerMove = trueの場合、当たり判定内にプレイヤーが入ったら動き出す
-        // canTriggerMove = falseの場合、その球は止まったまま
-        if (!canTriggerMove)
-        {
-            // 動かないようにするために、始動用当たり判定を無効化する
-            canMoveTrigger.enabled = false;
-        }
+        // 四角形オブジェクトの本体を認識する
+        body = transform.Find("SquareBody").gameObject;
+        bodyScript = body.GetComponent<SquareBody>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        // 動作フラグがオンの場合は指定方向に動く
-        if (isMove)
-        {
-            parent.transform.position += new Vector3(speed.x / 100, speed.y / 100, 0);
-        }
+
     }
 
-    /// <summary>
-    /// 当たり判定範囲内にプレイヤーが侵入したら効果発動
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    // インスペクターで値を変えた時に呼ばれる
+    private void OnValidate()
     {
-        if (collision.tag == "Player")
-        {
-            isMove = true;
-        }
+        // 変更した値に基づいて値を更新
+        body.gameObject.transform.localScale = new Vector3(size.x, size.y, 1);
+        bodyScript.SetSpeed(speed);
+        bodyScript.SetAutoStart(autoStart);
+        bodyScript.SetCanTriggerMove(canTriggerMove);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public Vector2 GetSpeed()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            // 親方にプレイヤーを追加することで一緒に動くようにする
-            collision.gameObject.transform.SetParent(parent.transform, false);
-
-            // 親方との位置関係を調整
-            collision.gameObject.transform.position -= parent.transform.position;
-        }
+        return this.speed;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public Vector2 GetSize()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            // プレイヤーを親方の子から追放する
-            collision.gameObject.transform.SetParent(null);
-        }
+        return this.size;
     }
 }
