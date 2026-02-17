@@ -15,7 +15,6 @@ public class SquareBody : MonoBehaviour
     private bool autoStart = false; // ゲーム開始直後に動き出すか否か（trueなら動く、falseなら動かない）
     private bool canTriggerMove = false; // 始動用当たり判定にプレイヤーが入ってきたら動き出すか否か（trueなら動く、falseなら動かない）
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // 親オブジェクトを取得
@@ -43,7 +42,6 @@ public class SquareBody : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         // 動作フラグがオンの場合は指定方向に動く
