@@ -17,12 +17,6 @@ public class Square : MonoBehaviour
         bodyScript = body.GetComponent<SquareBody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // インスペクターで値を変えた時に呼ばれる
     private void OnValidate()
     {

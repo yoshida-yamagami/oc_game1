@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     private GameDirector gameDirectorScript;
     private Rigidbody2D rb;
+    private Animator animator;
     private float speed = 0;
     private bool canMove = true; // 行動可否判定
 
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     {
         gameDirectorScript = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         canMove = true;
     }
 
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
         {
             float jumpForce = 7f; // ジャンプボタンを押されたときに上方向に与える力
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            animator.SetTrigger("Jump"); // ジャンプアニメーションスタート
         }
 
         // 上昇中にボタンを離したら、速度を急減衰させる（小・中ジャンプになる）
@@ -122,6 +125,9 @@ public class Player : MonoBehaviour
             float cancelRate = 0.5f; // 離した時にどれくらい勢いを殺すか
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * cancelRate);
         }
+
+        // 接地状態を常にAnimatorに伝える
+        animator.SetBool("isGround", IsGround());
     }
 
     private bool IsGround()
