@@ -1,4 +1,4 @@
-using System.Drawing;
+ï»¿using System.Drawing;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
@@ -7,18 +7,18 @@ public class Trap : MonoBehaviour
     [SerializeField] Vector2 speed = Vector2.zero;
     [SerializeField] bool canTriggerMove = false;
 
-    private bool isMove = false; // ˆÚ“®‚·‚é^‚µ‚È‚¢‚Ì§Œä
+    private bool isMove = false; // ç§»å‹•ã™ã‚‹ï¼ã—ãªã„ã®åˆ¶å¾¡
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isMove = false;
 
-        // canTriggerMove = true‚Ìê‡A“–‚½‚è”»’è“à‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚½‚ç“®‚«o‚·
-        // canTriggerMove = false‚Ìê‡‚Í~‚Ü‚Á‚½‚Ü‚Ü
+        // canTriggerMove = trueã®å ´åˆã€å½“ãŸã‚Šåˆ¤å®šå†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ãŸã‚‰å‹•ãå‡ºã™
+        // canTriggerMove = falseã®å ´åˆã¯æ­¢ã¾ã£ãŸã¾ã¾
         if (!canTriggerMove)
         {
-            // “®‚©‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚ÉAn“®—p“–‚½‚è”»’è‚ğ–³Œø‰»‚·‚é
+            // å‹•ã‹ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã«ã€å§‹å‹•ç”¨å½“ãŸã‚Šåˆ¤å®šã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             canMoveCollider.enabled = false;
         }
     }
@@ -26,14 +26,14 @@ public class Trap : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // “®ìƒtƒ‰ƒO‚ªƒIƒ“‚Ìê‡‚Íw’è•ûŒü‚É“®‚­
+        // å‹•ä½œãƒ•ãƒ©ã‚°ãŒã‚ªãƒ³ã®å ´åˆã¯æŒ‡å®šæ–¹å‘ã«å‹•ã
         if (isMove)
         {
             transform.position += new Vector3(speed.x / 100, speed.y / 100, 0);
         }
     }
 
-    // “–‚½‚è”»’è‚Ì”ÍˆÍ“à‚ÉƒvƒŒƒCƒ„[‚ªN“ü‚µ‚½‚ç”­“®
+    // å½“ãŸã‚Šåˆ¤å®šã®ç¯„å›²å†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¾µå…¥ã—ãŸã‚‰ç™ºå‹•
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")

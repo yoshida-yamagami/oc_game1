@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Chaos : MonoBehaviour
 {
     [SerializeField] GameObject gameOverText;
 
-    // ƒJƒIƒX‚É‘«‚ğ“¥‚İ“ü‚ê‚½‚çƒQ[ƒ€ƒI[ƒo[
+    // ã‚«ã‚ªã‚¹ã«è¶³ã‚’è¸ã¿å…¥ã‚ŒãŸã‚‰ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            // ƒQ[ƒ€ƒI[ƒo[ˆ—
-            gameOverText.SetActive(true); // ƒQ[ƒ€ƒI[ƒo[•\¦ƒeƒLƒXƒg
+            // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
+            gameOverText.SetActive(true); // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆ
         }
     }
 }

@@ -1,12 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : Object
 {
-    [SerializeField] Vector2 power;
-    [SerializeField] float bounciness; // ‹…‚ª•¨‘Ì‚Æ‚Ô‚Â‚©‚Á‚½‚Æ‚«‚É’µ‚Ë‚é¨‚¢i0 = ’µ‚Ë‚È‚¢A0`1 = ’µ‚Ë‚éB™X‚É’µ‚Ë‚é—Í‚ªã‚­‚È‚é 1 = “¯‚¶‚‚³‚Ü‚Å’µ‚Ë‚é 1` = ™X‚É’µ‚Ë‚é‚‚³‚ª‚‚­‚È‚é
-    [SerializeField] bool autoStart = false; // ƒQ[ƒ€ŠJn’¼Œã‚É‹…‚ª“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
-    [SerializeField] bool canTriggerMove = true; // ‹…‚Ìn“®—p“–‚½‚è”»’è‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚«‚½‚ç‹…‚ª“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
-
     private Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,26 +9,32 @@ public class Ball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // ƒ{[ƒ‹‚Ì’µ‚Ë‚é¨‚¢‚ğİ’è
-        rb.sharedMaterial.bounciness = bounciness;
+        // ãƒœãƒ¼ãƒ«ã®è·³ã­ã‚‹å‹¢ã„ã‚’è¨­å®š
+        rb.sharedMaterial.bounciness = åç™ºåŠ›;
 
-        // autoStart = true‚Ìê‡AƒQ[ƒ€ŠJn’¼Œã‚É‚·‚®“®‚«o‚·
-        // autoStart = false‚Ìê‡AƒQ[ƒ€ŠJn‚Í~‚Ü‚Á‚½ó‘Ô
-        if (autoStart)
+        // autoStart = trueã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«ã™ãå‹•ãå‡ºã™
+        // autoStart = falseã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã¯æ­¢ã¾ã£ãŸçŠ¶æ…‹
+        if (ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«å‹•ãå‡ºã™)
         {
-            rb.linearVelocity = power;
+            rb.linearVelocity = å‹•ãå§‹ã‚ã«ã‹ã‘ã‚‹åŠ›;
         }
         else
         {
             rb.bodyType = RigidbodyType2D.Static;
         }
 
-        // canTriggerMove = true‚Ìê‡A“–‚½‚è”»’è“à‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚½‚ç“®‚«o‚·
-        // canTriggerMove = false‚Ìê‡A‚»‚Ì‹…‚Í~‚Ü‚Á‚½‚Ü‚Ü
-        if (!canTriggerMove)
+        // canTriggerMove = trueã®å ´åˆã€å½“ãŸã‚Šåˆ¤å®šå†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ãŸã‚‰å‹•ãå‡ºã™
+        // canTriggerMove = falseã®å ´åˆã€ãã®çƒã¯æ­¢ã¾ã£ãŸã¾ã¾
+        if (!ç¯„å›²å†…ã«å…¥ã£ãŸã‚‰å‹•ãå‡ºã™)
         {
-            // “®‚©‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚ÉBoxCollider2D‚ğ–³Œø‰»‚·‚é
+            // å‹•ã‹ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã«BoxCollider2Dã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        if (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å½“ãŸã‚‹ã¨ãƒ€ãƒ¡ãƒ¼ã‚¸)
+        {
+            // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚°ã‚’Trapã«å¤‰ãˆã‚‹
+            gameObject.tag = "Trap";
         }
     }
 
@@ -45,12 +46,12 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ”ÍˆÍ“à‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚½ê‡
+        // ç¯„å›²å†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ãŸå ´åˆ
         if (collision.tag == "Player")
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
-            // w’è•ûŒü‚É—Í‚ğ‚©‚¯‚é
-            rb.linearVelocity = power;
+            // æŒ‡å®šæ–¹å‘ã«åŠ›ã‚’ã‹ã‘ã‚‹
+            rb.linearVelocity = å‹•ãå§‹ã‚ã«ã‹ã‘ã‚‹åŠ›;
         }
     }
 }

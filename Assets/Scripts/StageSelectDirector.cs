@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class StageSelectDirector : MonoBehaviour
 {
     /// <summary>
-    /// ƒQ[ƒ€ƒV[ƒ“‚É‘JˆÚ
+    /// ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã«é·ç§»
     /// </summary>
     public void GoToGameScene()
     {

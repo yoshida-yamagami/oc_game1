@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚Ì“®ì‚ğŠÇ—
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ä½œã‚’ç®¡ç†
 /// </summary>
 public class Player : MonoBehaviour
 {
@@ -25,12 +25,12 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private float speed = 0;
-    private bool canMove = true; // s“®‰Â”Û”»’è
+    private bool canMove = true; // è¡Œå‹•å¯å¦åˆ¤å®š
 
-    // ’n–Ê‚Æ‚Ì“–‚½‚è”»’è‚Ég—p
-    Vector3 groundCheckOffset = new Vector3(0.3f, 0.3f, 0); // ¶‰E‚Ì•0.3A‰º•ûŒü‚Ö0.3
-    float groundCheckDistance = 0.3f; // ƒfƒoƒbƒO—p‚Ìü‚Ì’·‚³w’è
-    private bool isGrounded; // Œ»İÚ’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Û‚·‚é•Ï”iGizmos‚Å‚ÌF•ª‚¯‚Ég—pj
+    // åœ°é¢ã¨ã®å½“ãŸã‚Šåˆ¤å®šã«ä½¿ç”¨
+    Vector3 groundCheckOffset = new Vector3(0.3f, 0.3f, 0); // å·¦å³ã®å¹…0.3ã€ä¸‹æ–¹å‘ã¸0.3
+    float groundCheckDistance = 0.3f; // ãƒ‡ãƒãƒƒã‚°ç”¨ã®ç·šã®é•·ã•æŒ‡å®š
+    private bool isGrounded; // ç¾åœ¨æ¥åœ°ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’ä¿æŒã™ã‚‹å¤‰æ•°ï¼ˆGizmosã§ã®è‰²åˆ†ã‘ã«ä½¿ç”¨ï¼‰
 
     void Start()
     {
@@ -42,25 +42,25 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // s“®‚Å‚«‚È‚¢ê‡‚Íˆ—‚µ‚È‚¢
+        // è¡Œå‹•ã§ããªã„å ´åˆã¯å‡¦ç†ã—ãªã„
         if (!canMove)
         {
             return;
         }
 
-        // •ûŒü‚ğŒˆ’è
+        // æ–¹å‘ã‚’æ±ºå®š
         ReadMoveInput();
 
-        // ƒWƒƒƒ“ƒv”»’è
+        // ã‚¸ãƒ£ãƒ³ãƒ—åˆ¤å®š
         JudgeJump();
     }
 
     /// <summary>
-    /// ˆê’èŠÔŠu‚ÅŒÄ‚Î‚ê‚é
+    /// ä¸€å®šé–“éš”ã§å‘¼ã°ã‚Œã‚‹
     /// </summary>
     private void FixedUpdate()
     {
-        // s“®‚Å‚«‚È‚¢ê‡‚Íˆ—‚µ‚È‚¢
+        // è¡Œå‹•ã§ããªã„å ´åˆã¯å‡¦ç†ã—ãªã„
         if (!canMove)
         {
             return;
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     }
     
     /// <summary>
-    /// …•½•ûŒü‚Ì“ü—Í‚©‚çAƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğİ’è
+    /// æ°´å¹³æ–¹å‘ã®å…¥åŠ›ã‹ã‚‰ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’è¨­å®š
     /// </summary>
     private void ReadMoveInput()
     {
@@ -93,40 +93,40 @@ public class Player : MonoBehaviour
 
         if (inputVector.x == 0)
         {
-            // ~‚Ü‚Á‚Ä‚¢‚éó‘Ô
+            // æ­¢ã¾ã£ã¦ã„ã‚‹çŠ¶æ…‹
             direction = DIRECTION_TYPE.STOP;
         }
         else if (inputVector.x > 0)
         {
-            // ‰E‚É“®‚­
+            // å³ã«å‹•ã
             direction = DIRECTION_TYPE.RIGHT;
         }
         else if (inputVector.x < 0)
         {
-            // ¶‚É“®‚­
+            // å·¦ã«å‹•ã
             direction = DIRECTION_TYPE.LEFT;
         }
     }
 
     private void JudgeJump()
     {
-        // ƒWƒƒƒ“ƒvƒ{ƒ^ƒ“‚ğ‰Ÿ‚³‚ê‚½‚ç‰‘¬“x‚ğ—^‚¦‚é
-        // ƒWƒƒƒ“ƒv‚Í’n–Ê‚ÉÚ‚µ‚Ä‚¢‚é‚Ì‚İ‰Â”\i2’iƒWƒƒƒ“ƒv–h~j
+        // ã‚¸ãƒ£ãƒ³ãƒ—ãƒœã‚¿ãƒ³ã‚’æŠ¼ã•ã‚ŒãŸã‚‰åˆé€Ÿåº¦ã‚’ä¸ãˆã‚‹
+        // ã‚¸ãƒ£ãƒ³ãƒ—ã¯åœ°é¢ã«æ¥ã—ã¦ã„ã‚‹æ™‚ã®ã¿å¯èƒ½ï¼ˆ2æ®µã‚¸ãƒ£ãƒ³ãƒ—é˜²æ­¢ï¼‰
         if (IsGround() && playerInput.actions["Jump"].WasPressedThisFrame())
         {
-            float jumpForce = 7f; // ƒWƒƒƒ“ƒvƒ{ƒ^ƒ“‚ğ‰Ÿ‚³‚ê‚½‚Æ‚«‚Éã•ûŒü‚É—^‚¦‚é—Í
+            float jumpForce = 7f; // ã‚¸ãƒ£ãƒ³ãƒ—ãƒœã‚¿ãƒ³ã‚’æŠ¼ã•ã‚ŒãŸã¨ãã«ä¸Šæ–¹å‘ã«ä¸ãˆã‚‹åŠ›
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            animator.SetTrigger("Jump"); // ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“ƒXƒ^[ƒg
+            animator.SetTrigger("Jump"); // ã‚¸ãƒ£ãƒ³ãƒ—ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ã‚¿ãƒ¼ãƒˆ
         }
 
-        // ã¸’†‚Éƒ{ƒ^ƒ“‚ğ—£‚µ‚½‚çA‘¬“x‚ğ‹}Œ¸Š‚³‚¹‚éi¬E’†ƒWƒƒƒ“ƒv‚É‚È‚éj
+        // ä¸Šæ˜‡ä¸­ã«ãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸã‚‰ã€é€Ÿåº¦ã‚’æ€¥æ¸›è¡°ã•ã›ã‚‹ï¼ˆå°ãƒ»ä¸­ã‚¸ãƒ£ãƒ³ãƒ—ã«ãªã‚‹ï¼‰
         if (playerInput.actions["Jump"].WasReleasedThisFrame() && rb.linearVelocity.y > 0)
         {
-            float cancelRate = 0.5f; // —£‚µ‚½‚É‚Ç‚ê‚­‚ç‚¢¨‚¢‚ğE‚·‚©
+            float cancelRate = 0.5f; // é›¢ã—ãŸæ™‚ã«ã©ã‚Œãã‚‰ã„å‹¢ã„ã‚’æ®ºã™ã‹
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * cancelRate);
         }
 
-        // Ú’nó‘Ô‚ğí‚ÉAnimator‚É“`‚¦‚é
+        // æ¥åœ°çŠ¶æ…‹ã‚’å¸¸ã«Animatorã«ä¼ãˆã‚‹
         animator.SetBool("isGround", IsGround());
     }
 
@@ -137,31 +137,31 @@ public class Player : MonoBehaviour
         Vector3 leftEnd = leftStart - Vector3.up * groundCheckDistance;
         Vector3 rightEnd = rightStart - Vector3.up * groundCheckDistance;
 
-        // LinecastÀs
+        // Linecastå®Ÿè¡Œ
         RaycastHit2D hitL = Physics2D.Linecast(leftStart, leftEnd, groundLayer);
         RaycastHit2D hitR = Physics2D.Linecast(rightStart, rightEnd, groundLayer);
 
-        // Ú’n”»’è
+        // æ¥åœ°åˆ¤å®š
         bool grounded = hitL.collider != null || hitR.collider != null;
 
-        // --- 1. ”»’è‚Ì‚İF‚ğ•Ï‚¦‚é (Debug.DrawLine) ---
-        // Ú’n‚µ‚Ä‚¢‚½‚ç—ÎA•‚‚¢‚Ä‚¢‚½‚çÔ
+        // --- 1. åˆ¤å®šæ™‚ã®ã¿è‰²ã‚’å¤‰ãˆã‚‹ (Debug.DrawLine) ---
+        // æ¥åœ°ã—ã¦ã„ãŸã‚‰ç·‘ã€æµ®ã„ã¦ã„ãŸã‚‰èµ¤
         Color lineColor = grounded ? Color.green : Color.red;
         Debug.DrawLine(leftStart, leftEnd, lineColor);
         Debug.DrawLine(rightStart, rightEnd, lineColor);
 
-        // ƒfƒoƒbƒO—pƒƒOF‰½‚É“–‚½‚Á‚Ä‚¢‚é‚©•\¦
+        // ãƒ‡ãƒãƒƒã‚°ç”¨ãƒ­ã‚°ï¼šä½•ã«å½“ãŸã£ã¦ã„ã‚‹ã‹è¡¨ç¤º
         if (hitL.collider != null) Debug.Log($"Left hit: {hitL.collider.name}");
         if (hitR.collider != null) Debug.Log($"Right hit: {hitR.collider.name}");
 
         return grounded;
     }
 
-    // --- 2. GizmosiƒMƒYƒ‚j‚ğ—˜—p‚·‚é ---
-    // ‚±‚Ìƒƒ\ƒbƒh‚ÍUnityƒGƒfƒBƒ^ã‚Åí‚ÉiÄ¶‚µ‚Ä‚¢‚È‚­‚Ä‚àjŒÄ‚Î‚ê‚Ü‚·
+    // --- 2. Gizmosï¼ˆã‚®ã‚ºãƒ¢ï¼‰ã‚’åˆ©ç”¨ã™ã‚‹ ---
+    // ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯Unityã‚¨ãƒ‡ã‚£ã‚¿ä¸Šã§å¸¸ã«ï¼ˆå†ç”Ÿã—ã¦ã„ãªãã¦ã‚‚ï¼‰å‘¼ã°ã‚Œã¾ã™
     private void OnDrawGizmos()
     {
-        // ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ª“®‚¢‚Ä‚¢‚È‚¢‚Í”’A“®‚¢‚Ä‚¢‚é‚Í”»’èŒ‹‰Ê‚É‡‚í‚¹‚é
+        // ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒå‹•ã„ã¦ã„ãªã„æ™‚ã¯ç™½ã€å‹•ã„ã¦ã„ã‚‹æ™‚ã¯åˆ¤å®šçµæœã«åˆã‚ã›ã‚‹
         if (!Application.isPlaying)
         {
             Gizmos.color = Color.white;
@@ -171,59 +171,59 @@ public class Player : MonoBehaviour
             Gizmos.color = isGrounded ? Color.green : Color.red;
         }
 
-        // ”»’èˆÊ’u‚ğŒvZiUpdate“à‚ÌŒvZ‚Æ“¯‚¶‚É‚·‚éj
+        // åˆ¤å®šä½ç½®ã‚’è¨ˆç®—ï¼ˆUpdateå†…ã®è¨ˆç®—ã¨åŒã˜ã«ã™ã‚‹ï¼‰
         Vector3 leftStart = transform.position + new Vector3(-groundCheckOffset.x, -groundCheckOffset.y, 0);
         Vector3 rightStart = transform.position + new Vector3(groundCheckOffset.x, -groundCheckOffset.y, 0);
 
-        // ƒMƒYƒ‚‚Æ‚µ‚Äü‚ğ•`‰æ
+        // ã‚®ã‚ºãƒ¢ã¨ã—ã¦ç·šã‚’æç”»
         Gizmos.DrawLine(leftStart, leftStart - Vector3.up * groundCheckDistance);
         Gizmos.DrawLine(rightStart, rightStart - Vector3.up * groundCheckDistance);
     }
 
-    // ‘¼‚ÌƒIƒuƒWƒFƒNƒg‚Æ‚ÌÕ“Ë”»’è
+    // ä»–ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®è¡çªåˆ¤å®š
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ƒgƒ‰ƒbƒv‚Æ‚Ô‚Â‚©‚Á‚½‚çƒQ[ƒ€ƒI[ƒo[
+        // ãƒˆãƒ©ãƒƒãƒ—ã¨ã¶ã¤ã‹ã£ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
         if (collision.gameObject.tag == "Trap")
         {
-            // ƒQ[ƒ€ƒI[ƒo[ˆ—
+            // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
             GameOver();
         }
     }
 
-    // ‘¼‚ÌƒIƒuƒWƒFƒNƒg‚Æ‚Ì’Ê‰ß”»’è
+    // ä»–ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®é€šéåˆ¤å®š
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ƒS[ƒ‹‚ÉÚG‚µ‚½‚çƒQ[ƒ€ƒNƒŠƒA
+        // ã‚´ãƒ¼ãƒ«ã«æ¥è§¦ã—ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
         if (collision.gameObject.tag == "Goal")
         {
-            // ƒXƒe[ƒWƒNƒŠƒAˆ—
+            // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢å‡¦ç†
             GameClear();
         }
 
-        // “Ş—‚ÉÚG‚µ‚½‚çƒQ[ƒ€ƒI[ƒo[
+        // å¥ˆè½ã«æ¥è§¦ã—ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
         if (collision.gameObject.tag == "Chaos")
         {
-            // ƒQ[ƒ€ƒI[ƒo[ˆ—
+            // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
             GameOver();
         }
     }
 
-    // ƒQ[ƒ€ƒI[ƒo[‚Ìˆ—
+    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®å‡¦ç†
     private void GameClear()
     {
         gameDirectorScript.GameClear();
 
-        // s“®‚Å‚«‚È‚¢‚æ‚¤‚É§Œä
+        // è¡Œå‹•ã§ããªã„ã‚ˆã†ã«åˆ¶å¾¡
         canMove = false;
     }
 
-    // ƒQ[ƒ€ƒI[ƒo[‚Ìˆ—
+    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®å‡¦ç†
     private void GameOver()
     {
         gameDirectorScript.GameOver();
 
-        // s“®‚Å‚«‚È‚¢‚æ‚¤‚É§Œä
+        // è¡Œå‹•ã§ããªã„ã‚ˆã†ã«åˆ¶å¾¡
         canMove = false;
     }
 }

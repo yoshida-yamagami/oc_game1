@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Square : MonoBehaviour
 {
@@ -6,21 +6,21 @@ public class Square : MonoBehaviour
     [SerializeField] SquareBody bodyScript;
     [SerializeField] Vector2 speed = Vector2.zero;
     [SerializeField] Vector2 size = new Vector2(1, 1);
-    [SerializeField] bool autoStart = false; // ƒQ[ƒ€ŠJn’¼Œã‚É“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
-    [SerializeField] bool canTriggerMove = true; // n“®—p“–‚½‚è”»’è‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚«‚½‚ç“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
+    [SerializeField] bool autoStart = false; // ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«å‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
+    [SerializeField] bool canTriggerMove = true; // å§‹å‹•ç”¨å½“ãŸã‚Šåˆ¤å®šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ã¦ããŸã‚‰å‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // lŠpŒ`ƒIƒuƒWƒFƒNƒg‚Ì–{‘Ì‚ğ”F¯‚·‚é
+        // å››è§’å½¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æœ¬ä½“ã‚’èªè­˜ã™ã‚‹
         body = transform.Find("SquareBody").gameObject;
         bodyScript = body.GetComponent<SquareBody>();
     }
 
-    // ƒCƒ“ƒXƒyƒNƒ^[‚Å’l‚ğ•Ï‚¦‚½‚ÉŒÄ‚Î‚ê‚é
+    // ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã§å€¤ã‚’å¤‰ãˆãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     private void OnValidate()
     {
-        // •ÏX‚µ‚½’l‚ÉŠî‚Ã‚¢‚Ä’l‚ğXV
+        // å¤‰æ›´ã—ãŸå€¤ã«åŸºã¥ã„ã¦å€¤ã‚’æ›´æ–°
         body.gameObject.transform.localScale = new Vector3(size.x, size.y, 1);
         bodyScript.SetSpeed(speed);
         bodyScript.SetAutoStart(autoStart);

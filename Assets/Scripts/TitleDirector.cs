@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class TitleDirector : MonoBehaviour
 {
     /// <summary>
-    /// ƒXƒe[ƒWƒZƒŒƒNƒgƒV[ƒ“‚É‘JˆÚ
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆã‚·ãƒ¼ãƒ³ã«é·ç§»
     /// </summary>
     public void GoToStageSelectScene()
     {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
@@ -11,7 +11,7 @@ public class GameDirector : MonoBehaviour
 
     void Start()
     {
-        // ƒeƒLƒXƒg‚âƒ{ƒ^ƒ“‚ğ‰B‚·
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚„ãƒœã‚¿ãƒ³ã‚’éš ã™
         gameClearText.SetActive(false);
         gameOverText.SetActive(false);
         restartButton.SetActive(false);
@@ -24,21 +24,21 @@ public class GameDirector : MonoBehaviour
 
     public void GameOver()
     {
-        // ƒQ[ƒ€ƒI[ƒo[‚Ì•¶š•\¦
+        // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã®æ–‡å­—è¡¨ç¤º
         gameOverText.SetActive(true);
         restartButton.SetActive(true);
     }
 
     public void GameClear()
     {
-        // ƒQ[ƒ€ƒNƒŠƒA‚Ì•¶š•\¦
+        // ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã®æ–‡å­—è¡¨ç¤º
         gameClearText.SetActive(true);
         restartButton.SetActive(true);
     }
 
     public void Restart()
     {
-        // “¯‚¶ƒXƒe[ƒW‚ğÅ‰‚©‚çn‚ß‚é
+        // åŒã˜ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’æœ€åˆã‹ã‚‰å§‹ã‚ã‚‹
         Initiate.Fade("GameScene", Color.black, 1.0f);
     }
 }

@@ -1,4 +1,4 @@
-using System.Drawing;
+ï»¿using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,42 +9,42 @@ public class SquareBody : MonoBehaviour
     private GameObject parent;
     private Square parentScript;
 
-    private Vector2 speed; // ˆÚ“®•ûŒü‚Æ‘¬“x‚Ìİ’è
-    private Vector2 size; // ƒTƒCƒY‚Ìİ’è
-    private bool isMove = false; // ˆÚ“®‚·‚é^‚µ‚È‚¢‚Ì§Œä
-    private bool autoStart = false; // ƒQ[ƒ€ŠJn’¼Œã‚É“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
-    private bool canTriggerMove = false; // n“®—p“–‚½‚è”»’è‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚«‚½‚ç“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
+    private Vector2 speed; // ç§»å‹•æ–¹å‘ã¨é€Ÿåº¦ã®è¨­å®š
+    private Vector2 size; // ã‚µã‚¤ã‚ºã®è¨­å®š
+    private bool isMove = false; // ç§»å‹•ã™ã‚‹ï¼ã—ãªã„ã®åˆ¶å¾¡
+    private bool autoStart = false; // ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«å‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
+    private bool canTriggerMove = false; // å§‹å‹•ç”¨å½“ãŸã‚Šåˆ¤å®šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ã¦ããŸã‚‰å‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
 
     void Start()
     {
-        // eƒIƒuƒWƒFƒNƒg‚ğæ“¾
+        // è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
         parent = transform.parent.gameObject;
         parentScript = parent.GetComponent<Square>();
 
-        // e‚©‚ç—^‚¦‚ç‚ê‚éî•ñ‚ğ”½‰f
+        // è¦ªã‹ã‚‰ä¸ãˆã‚‰ã‚Œã‚‹æƒ…å ±ã‚’åæ˜ 
         this.speed = parentScript.GetSpeed();
         this.size = parentScript.GetSize();
         UpdateSize();
 
-        // autoStart = true‚Ìê‡AƒQ[ƒ€ŠJn’¼Œã‚É‚·‚®“®‚«o‚·
-        // autoStart = false‚Ìê‡AƒQ[ƒ€ŠJn‚Í~‚Ü‚Á‚½ó‘Ô
+        // autoStart = trueã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«ã™ãå‹•ãå‡ºã™
+        // autoStart = falseã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã¯æ­¢ã¾ã£ãŸçŠ¶æ…‹
         if (autoStart)
         {
             isMove = true;
         }
 
-        // canTriggerMove = true‚Ìê‡A“–‚½‚è”»’è“à‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚½‚ç“®‚«o‚·
-        // canTriggerMove = false‚Ìê‡A‚»‚Ì‹…‚Í~‚Ü‚Á‚½‚Ü‚Ü
+        // canTriggerMove = trueã®å ´åˆã€å½“ãŸã‚Šåˆ¤å®šå†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ãŸã‚‰å‹•ãå‡ºã™
+        // canTriggerMove = falseã®å ´åˆã€ãã®çƒã¯æ­¢ã¾ã£ãŸã¾ã¾
         if (!canTriggerMove)
         {
-            // “®‚©‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚ÉAn“®—p“–‚½‚è”»’è‚ğ–³Œø‰»‚·‚é
+            // å‹•ã‹ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã«ã€å§‹å‹•ç”¨å½“ãŸã‚Šåˆ¤å®šã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             canMoveCollider.enabled = false;
         }
     }
 
     void FixedUpdate()
     {
-        // “®ìƒtƒ‰ƒO‚ªƒIƒ“‚Ìê‡‚Íw’è•ûŒü‚É“®‚­
+        // å‹•ä½œãƒ•ãƒ©ã‚°ãŒã‚ªãƒ³ã®å ´åˆã¯æŒ‡å®šæ–¹å‘ã«å‹•ã
         if (isMove)
         {
             parent.transform.position += new Vector3(speed.x / 100, speed.y / 100, 0);
@@ -52,7 +52,7 @@ public class SquareBody : MonoBehaviour
     }
 
     /// <summary>
-    /// “–‚½‚è”»’è”ÍˆÍ“à‚ÉƒvƒŒƒCƒ„[‚ªN“ü‚µ‚½‚çŒø‰Ê”­“®
+    /// å½“ãŸã‚Šåˆ¤å®šç¯„å›²å†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¾µå…¥ã—ãŸã‚‰åŠ¹æœç™ºå‹•
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,13 +67,13 @@ public class SquareBody : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // ƒvƒŒƒCƒ„[‚ª’N‚©‚Ìq‚Å‚ ‚é‰Â”\«‚ğ”rœ‚·‚é
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒèª°ã‹ã®å­ã§ã‚ã‚‹å¯èƒ½æ€§ã‚’æ’é™¤ã™ã‚‹
             collision.gameObject.transform.SetParent(null);
 
-            // e•û‚ÉƒvƒŒƒCƒ„[‚ğ’Ç‰Á‚·‚é‚±‚Æ‚Åˆê‚É“®‚­‚æ‚¤‚É‚·‚é
+            // è¦ªæ–¹ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿½åŠ ã™ã‚‹ã“ã¨ã§ä¸€ç·’ã«å‹•ãã‚ˆã†ã«ã™ã‚‹
             collision.gameObject.transform.SetParent(parent.transform, false);
 
-            // e•û‚Æ‚ÌˆÊ’uŠÖŒW‚ğ’²®
+            // è¦ªæ–¹ã¨ã®ä½ç½®é–¢ä¿‚ã‚’èª¿æ•´
             collision.gameObject.transform.position -= parent.transform.position;
         }
     }
@@ -82,9 +82,9 @@ public class SquareBody : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // 1. e‚ª‘¶İ‚·‚é‚©H
-            // 2. ‚»‚Ìe‚ªuƒAƒNƒeƒBƒu‚É•Ï‰»’†iÁ‚¦‚©‚©‚Á‚Ä‚¢‚éjv‚Å‚Í‚È‚¢‚©H
-            // 3. ©g‚àÁ‚¦‚©‚©‚Á‚Ä‚¢‚È‚¢‚©H
+            // 1. è¦ªãŒå­˜åœ¨ã™ã‚‹ã‹ï¼Ÿ
+            // 2. ãã®è¦ªãŒã€Œã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«å¤‰åŒ–ä¸­ï¼ˆæ¶ˆãˆã‹ã‹ã£ã¦ã„ã‚‹ï¼‰ã€ã§ã¯ãªã„ã‹ï¼Ÿ
+            // 3. è‡ªèº«ã‚‚æ¶ˆãˆã‹ã‹ã£ã¦ã„ãªã„ã‹ï¼Ÿ
             if (parent != null && parent.gameObject.activeInHierarchy)
             {
                 collision.gameObject.transform.SetParent(null);
