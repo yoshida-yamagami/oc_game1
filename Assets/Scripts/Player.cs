@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 /// <summary>
 /// プレイヤーの動作を管理
@@ -206,6 +206,12 @@ public class Player : MonoBehaviour
         {
             // ゲームオーバー処理
             GameOver();
+        }
+
+        // コインに接触したらコインを取得
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
         }
     }
 
