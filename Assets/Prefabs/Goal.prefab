@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1574782108036504069}
+  - component: {fileID: 8344601306714155146}
   - component: {fileID: 6980334260129804275}
-  - component: {fileID: 8422852802368188244}
   m_Layer: 0
-  m_Name: GoalObject
+  m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,6 +34,23 @@ Transform:
   - {fileID: 3000805518560243739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8344601306714155146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3661640235641870193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8cff1268c4fc047bdd7d4b2be4df8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
+  "\u52D5\u304D\u59CB\u3081\u306B\u304B\u3051\u308B\u529B": {x: 0, y: 0}
+  "\u53CD\u767A\u529B": 0
+  "\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u5F53\u305F\u308B\u3068\u30C0\u30E1\u30FC\u30B8": 0
+  "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306B\u52D5\u304D\u51FA\u3059": 0
+  "\u7BC4\u56F2\u5185\u306B\u5165\u3063\u305F\u3089\u52D5\u304D\u51FA\u3059": 1
 --- !u!61 &6980334260129804275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80,19 +97,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5349851, y: 1.4513938}
   m_EdgeRadius: 0
---- !u!114 &8422852802368188244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3661640235641870193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277ee31d68bef7f4a848f5f8febb44e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Goal
-  gameClearText: {fileID: 0}
 --- !u!1001 &298291444505803113
 PrefabInstance:
   m_ObjectHideFlags: 0

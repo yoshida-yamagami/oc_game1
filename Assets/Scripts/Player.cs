@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class Player : MonoBehaviour
 {
-    [SerializeField] LayerMask groundLayer;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject gameClearText;
@@ -20,7 +19,9 @@ public class Player : MonoBehaviour
     }
 
     DIRECTION_TYPE direction = DIRECTION_TYPE.STOP;
+    private const int NO_INPUT_TIME_COUNT = 3;
 
+    private LayerMask groundLayer; // 床と認識するレイヤーを指定
     private GameDirector gameDirectorScript;
     private Rigidbody2D rb;
     private Animator animator;
@@ -31,13 +32,19 @@ public class Player : MonoBehaviour
     Vector3 groundCheckOffset = new Vector3(0.3f, 0.3f, 0); // 左右の幅0.3、下方向へ0.3
     float groundCheckDistance = 0.3f; // デバッグ用の線の長さ指定
     private bool isGrounded; // 現在接地しているかどうかを保持する変数（Gizmosでの色分けに使用）
+    private int noInputTime = 0; // ジャンプ直後の誤判定を防ぐため、入力受付不可時間を設定
 
+    private SpriteRenderer spriteRenderer; // ★追加
     void Start()
     {
         gameDirectorScript = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         canMove = true;
+
+        groundLayer = LayerMask.GetMask("Ground"); // Groundレイヤーを床と認識
+
+        spriteRenderer = GetComponent<SpriteRenderer>(); // ★追加
     }
 
     private void Update()
@@ -73,11 +80,13 @@ public class Player : MonoBehaviour
                 break;
             case DIRECTION_TYPE.RIGHT:
                 speed = 3;
-                transform.localScale = new Vector3(1, 1, 1);
+                spriteRenderer.flipX = false; // ★修正（右を向く：反転なし）
+                //transform.localScale = new Vector3(1, 1, 1);
                 break;
             case DIRECTION_TYPE.LEFT:
                 speed = -3;
-                transform.localScale = new Vector3(-1, 1, 1);
+                spriteRenderer.flipX = true;  // ★修正（左を向く：左右反転）
+                //transform.localScale = new Vector3(-1, 1, 1);
                 break;
         }
 
@@ -110,15 +119,6 @@ public class Player : MonoBehaviour
 
     private void JudgeJump()
     {
-        // ジャンプボタンを押されたら初速度を与える
-        // ジャンプは地面に接している時のみ可能（2段ジャンプ防止）
-        if (IsGround() && playerInput.actions["Jump"].WasPressedThisFrame())
-        {
-            float jumpForce = 7f; // ジャンプボタンを押されたときに上方向に与える力
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            animator.SetTrigger("Jump"); // ジャンプアニメーションスタート
-        }
-
         // 上昇中にボタンを離したら、速度を急減衰させる（小・中ジャンプになる）
         if (playerInput.actions["Jump"].WasReleasedThisFrame() && rb.linearVelocity.y > 0)
         {
@@ -126,8 +126,17 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * cancelRate);
         }
 
-        // 接地状態を常にAnimatorに伝える
-        animator.SetBool("isGround", IsGround());
+        bool grounded = IsGround();
+
+        // ジャンプボタンを押されたら初速度を与える
+        // ジャンプは地面に接している時のみ可能（2段ジャンプ防止）
+        if (grounded && playerInput.actions["Jump"].WasPressedThisFrame())
+        {
+            float jumpForce = 7f; // ジャンプボタンを押されたときに上方向に与える力
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            noInputTime = NO_INPUT_TIME_COUNT;
+            return;
+        }
     }
 
     private bool IsGround()
@@ -141,18 +150,23 @@ public class Player : MonoBehaviour
         RaycastHit2D hitL = Physics2D.Linecast(leftStart, leftEnd, groundLayer);
         RaycastHit2D hitR = Physics2D.Linecast(rightStart, rightEnd, groundLayer);
 
-        // 接地判定
-        bool grounded = hitL.collider != null || hitR.collider != null;
+        bool grounded = false;
+        if (noInputTime > 0)
+        {
+            // 入力不可時間が設定されている場合はカウントダウン&ジャンプ状態
+            noInputTime--;
+        }
+        else
+        {
+            // 接地判定
+            grounded = hitL.collider != null || hitR.collider != null;
+        }
 
         // --- 1. 判定時のみ色を変える (Debug.DrawLine) ---
         // 接地していたら緑、浮いていたら赤
         Color lineColor = grounded ? Color.green : Color.red;
         Debug.DrawLine(leftStart, leftEnd, lineColor);
         Debug.DrawLine(rightStart, rightEnd, lineColor);
-
-        // デバッグ用ログ：何に当たっているか表示
-        if (hitL.collider != null) Debug.Log($"Left hit: {hitL.collider.name}");
-        if (hitR.collider != null) Debug.Log($"Right hit: {hitR.collider.name}");
 
         return grounded;
     }
@@ -178,6 +192,29 @@ public class Player : MonoBehaviour
         // ギズモとして線を描画
         Gizmos.DrawLine(leftStart, leftStart - Vector3.up * groundCheckDistance);
         Gizmos.DrawLine(rightStart, rightStart - Vector3.up * groundCheckDistance);
+    }
+
+    // 外部（床）から呼び出して親子関係を制御する窓口
+    public void SetPassengerOf(Transform floorTransform)
+    {
+        if (transform.parent != floorTransform)
+        {
+            transform.SetParent(floorTransform);
+        }
+    }
+
+    public void ReleasePassenger()
+    {
+        if (transform.parent != null)
+        {
+            transform.SetParent(null);
+        }
+    }
+
+    // 外部（トゲなど）から呼び出してダメージを受ける窓口
+    public void TakeDamage()
+    {
+        GameOver(); // 既存のGameOverメソッドを呼び出す
     }
 
     // 他のオブジェクトとの衝突判定

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Goal : MonoBehaviour
+public class Goal : Object
 {
     void Start()
     {

@@ -7,7 +7,7 @@ public class SquareBody : MonoBehaviour
     [SerializeField] BoxCollider2D canMoveCollider;
 
     private GameObject parent;
-    private Square parentScript;
+    private Square2 parentScript;
 
     private Vector2 speed; // 移動方向と速度の設定
     private Vector2 size; // サイズの設定
@@ -19,7 +19,7 @@ public class SquareBody : MonoBehaviour
     {
         // 親オブジェクトを取得
         parent = transform.parent.gameObject;
-        parentScript = parent.GetComponent<Square>();
+        parentScript = parent.GetComponent<Square2>();
 
         // 親から与えられる情報を反映
         this.speed = parentScript.GetSpeed();
@@ -65,6 +65,7 @@ public class SquareBody : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.tag == "Player")
         {
             // プレイヤーが誰かの子である可能性を排除する
@@ -76,6 +77,7 @@ public class SquareBody : MonoBehaviour
             // 親方との位置関係を調整
             collision.gameObject.transform.position -= parent.transform.position;
         }
+        */
     }
 
     private void OnCollisionExit2D(Collision2D collision)
