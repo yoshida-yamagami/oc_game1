@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // トラップとぶつかったらゲームオーバー
-        if (collision.gameObject.tag == "Trap")
+        if (collision.collider.gameObject.CompareTag("Trap"))
         {
             // ゲームオーバー処理
             GameOver();

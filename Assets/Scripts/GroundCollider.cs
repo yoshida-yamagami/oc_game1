@@ -1,52 +1,48 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ‚¢‚Á‚½‚ñ°”»’è‚Í‚µ‚Á‚©‚è‚Å‚«‚½B
-/// •‰‰×ŒyŒ¸‚Æ‚µ‚ÄA“®‚©‚È‚¢°‚ÍFixedUpdate‚ª‚¢‚ç‚È‚¢‚©‚à‚ËA‚Æ‚¢‚¤˜bB
-/// ‚»‚Ì‘Î‰‚ÍŒã‰ñ‚µ‚É‚µ‚ÄA‚Æ‚è‚ ‚¦‚¸Ÿ‚Íƒgƒ‰ƒbƒv‚Ì®—‚ğ—DæB
+/// ã„ã£ãŸã‚“åºŠåˆ¤å®šã¯ã—ã£ã‹ã‚Šã§ããŸã€‚
+/// è² è·è»½æ¸›ã¨ã—ã¦ã€å‹•ã‹ãªã„åºŠã¯FixedUpdateãŒã„ã‚‰ãªã„ã‹ã‚‚ã­ã€ã¨ã„ã†è©±ã€‚
+/// ãã®å¯¾å¿œã¯å¾Œå›ã—ã«ã—ã¦ã€ã¨ã‚Šã‚ãˆãšæ¬¡ã¯ãƒˆãƒ©ãƒƒãƒ—ã®æ•´ç†ã‚’å„ªå…ˆã€‚
 /// </summary>
-
 
 public class GroundCollider : MonoBehaviour
 {
-
-    // eƒIƒuƒWƒFƒNƒg‚ÌƒƒCƒ“ƒXƒNƒŠƒvƒg‚Ö‚ÌQÆ
-    private Object parent;
-    private BoxCollider2D collider; // ’n–Ê‚Ì“–‚½‚è”»’è
-    private LayerMask playerLayer; // PlayerƒŒƒCƒ„[‚ğİ’è
+    private BoxCollider2D collider; // åœ°é¢ã®å½“ãŸã‚Šåˆ¤å®š
+    private LayerMask playerLayer; // Playerãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨­å®š
     private bool hasPlayer = false;
 
     private void Start()
     {
-        parent = GetComponentInParent<Object>();
         collider = GetComponent<BoxCollider2D>();
-        playerLayer = LayerMask.GetMask("Player"); // PlayerƒŒƒCƒ„[‚ğƒvƒŒƒCƒ„[‚Æ”F¯
+        playerLayer = LayerMask.GetMask("Player"); // Playerãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨èªè­˜
     }
+
     private void FixedUpdate()
     {
-        // ©•ª‚ÌƒRƒ‰ƒCƒ_[‚Ì­‚µãi0.1fj‚ÌƒGƒŠƒA‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚é‚©ŒŸ’m
-        // BoxCast‚ÍƒRƒ‰ƒCƒ_[‚ÌŒ`‚»‚Ì‚Ü‚Üã•ûŒü‚ÉƒZƒ“ƒT[‚ğ”ò‚Î‚·ƒCƒ[ƒW‚Å‚·
+        // è‡ªåˆ†ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®å°‘ã—ä¸Šï¼ˆ0.1fï¼‰ã®ã‚¨ãƒªã‚¢ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ã‚‹ã‹æ¤œçŸ¥
+        // BoxCastã¯ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®å½¢ãã®ã¾ã¾ä¸Šæ–¹å‘ã«ã‚»ãƒ³ã‚µãƒ¼ã‚’é£›ã°ã™ã‚¤ãƒ¡ãƒ¼ã‚¸ã§ã™
         Vector2 size = collider.size;
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, size, 0f, Vector2.up, 0.1f, playerLayer);
 
         if (hit.collider != null)
         {
-            // ƒvƒŒƒCƒ„[‚ªã‚Éæ‚Á‚Ä‚¢‚éê‡
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¸Šã«ä¹—ã£ã¦ã„ã‚‹å ´åˆ
             Player player = hit.collider.GetComponent<Player>();
             if (player != null)
             {
-                // eƒIƒuƒWƒFƒNƒgiObject.cs‚ª‚Â‚¢‚Ä‚¢‚éˆê”Ôã‚Ìej‚ğæ“¾‚µ‚ÄƒvƒŒƒCƒ„[‚ğq‚É‚·‚é
+                // è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆObject.csãŒã¤ã„ã¦ã„ã‚‹ä¸€ç•ªä¸Šã®è¦ªï¼‰ã‚’å–å¾—ã—ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å­ã«ã™ã‚‹
                 player.SetPassengerOf(transform.parent);
                 hasPlayer = true;
             }
         }
         else
         {
-            // ƒvƒŒƒCƒ„[‚ªã‚É‚¢‚È‚¢ê‡
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¸Šã«ã„ãªã„å ´åˆ
             if (hasPlayer)
             {
-                // ’¼‘O‚Ü‚Åæ‚Á‚Ä‚¢‚½‚È‚çeqŠÖŒW‚ğ‰ğœ
-                // ”O‚Ì‚½‚ßAŒ»İ‚Ìq‚ª–{“–‚ÉƒvƒŒƒCƒ„[‚Ì‚¾‚¯‰ğœ‚·‚é
+                // ç›´å‰ã¾ã§ä¹—ã£ã¦ã„ãŸãªã‚‰è¦ªå­é–¢ä¿‚ã‚’è§£é™¤
+                // å¿µã®ãŸã‚ã€ç¾åœ¨ã®å­ãŒæœ¬å½“ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ™‚ã ã‘è§£é™¤ã™ã‚‹
                 Player player = transform.parent.GetComponentInChildren<Player>();
                 if (player != null)
                 {
@@ -57,24 +53,4 @@ public class GroundCollider : MonoBehaviour
             }
         }
     }
-
-    ///// ƒIƒuƒWƒFƒNƒg‚ªƒvƒŒƒCƒ„[‚ÆG‚ê‚½‚Ìˆ—
-    ///// </summary>
-    ///// <param name="collision"></param>
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (parent != null && collision.gameObject.tag == "Player")
-    //    {
-    //        // e‚ÌƒXƒNƒŠƒvƒg‚Éu©•ª‚Ì–ğŠ„v‚Æu‚Ô‚Â‚©‚Á‚½‘Šèv‚ğ“`‚¦‚é
-    //        parent.OnChildCollisionEnter("Ground", collision);
-    //    }
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        parent.OnChildCollisionExit("Ground", collision);
-    //    }
-    //}
 }

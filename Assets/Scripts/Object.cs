@@ -1,41 +1,41 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// ƒQ[ƒ€“àƒIƒuƒWƒFƒNƒg‚Ì‘c
+/// ã‚²ãƒ¼ãƒ å†…ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¥–
 /// </summary>
 public class Object : MonoBehaviour
 {
     /// <summary>
-    /// ‘SƒIƒuƒWƒFƒNƒg‹¤’Êİ’è
+    /// å…¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå…±é€šè¨­å®š
     /// </summary>
-    [Tooltip("\n—Í‚ğ‚©‚¯‚é•ûŒü‚Æ‘å‚«‚³‚ğİ’è\n”’l‚ª‘å‚«‚¢‚Ù‚Ç‘‚­“®‚­\nxF³‚È‚ç‰EA•‰‚È‚ç¶‚É“®‚­\nyF³‚È‚çãA•‰‚È‚ç‰º‚É“®‚­\n")]
-    [SerializeField] protected Vector2 “®‚«n‚ß‚É‚©‚¯‚é—Í;
-    [Tooltip("\n‰½‚©‚É‚Ô‚Â‚©‚Á‚½‚Æ‚«‚Ì“®‚«‚É‰e‹¿\n0F”½”­‚¹‚¸\n0`1F‚ä‚é‚­”½”­\n1F‚Ô‚Â‚©‚Á‚½—Í‚Æ“¯‚¶‚¾‚¯”½”­\n1ˆÈãF‚Ô‚Â‚©‚Á‚½—Í‚æ‚è‹­‚­”½”­\n")]
-    [SerializeField] protected float ”½”­—Í; // ‹…‚ª•¨‘Ì‚Æ‚Ô‚Â‚©‚Á‚½‚Æ‚«‚É’µ‚Ë‚é¨‚¢i0 = ’µ‚Ë‚È‚¢A0`1 = ’µ‚Ë‚éB™X‚É’µ‚Ë‚é—Í‚ªã‚­‚È‚é 1 = “¯‚¶‚‚³‚Ü‚Å’µ‚Ë‚é 1` = ™X‚É’µ‚Ë‚é‚‚³‚ª‚‚­‚È‚é
-    [Tooltip("\nƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é‚ÆƒvƒŒƒCƒ„[‚ªƒ_ƒ[ƒW‚ğó‚¯‚é‚æ‚¤‚É‚È‚é\n")]
-    [SerializeField] protected bool ƒvƒŒƒCƒ„[‚É“–‚½‚é‚Æƒ_ƒ[ƒW = false;
-    [Tooltip("\nƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é‚ÆƒQ[ƒ€ŠJn‚É“®‚«o‚·\n")]
-    [SerializeField] protected bool ƒQ[ƒ€ŠJn‚É“®‚«o‚· = false; // ƒQ[ƒ€ŠJn’¼Œã‚É‹…‚ª“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
-    [Tooltip("\nƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é‚ÆƒvƒŒƒCƒ„[‚ª–^Collider‚Ì”ÍˆÍ“à‚É“ü‚Á‚½‚É“®‚«o‚·\n")]
-    [SerializeField] protected bool ”ÍˆÍ“à‚É“ü‚Á‚½‚ç“®‚«o‚· = true; // ‹…‚Ìn“®—p“–‚½‚è”»’è‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚«‚½‚ç‹…‚ª“®‚«o‚·‚©”Û‚©itrue‚È‚ç“®‚­Afalse‚È‚ç“®‚©‚È‚¢j
+    [Tooltip("\nåŠ›ã‚’ã‹ã‘ã‚‹æ–¹å‘ã¨å¤§ãã•ã‚’è¨­å®š\næ•°å€¤ãŒå¤§ãã„ã»ã©æ—©ãå‹•ã\nxï¼šæ­£ãªã‚‰å³ã€è² ãªã‚‰å·¦ã«å‹•ã\nyï¼šæ­£ãªã‚‰ä¸Šã€è² ãªã‚‰ä¸‹ã«å‹•ã\n")]
+    [SerializeField] protected Vector2 å‹•ãå§‹ã‚ã«ã‹ã‘ã‚‹åŠ›;
+    [Tooltip("\nä½•ã‹ã«ã¶ã¤ã‹ã£ãŸã¨ãã®å‹•ãã«å½±éŸ¿\n0ï¼šåç™ºã›ãš\n0ï½1ï¼šã‚†ã‚‹ãåç™º\n1ï¼šã¶ã¤ã‹ã£ãŸåŠ›ã¨åŒã˜ã ã‘åç™º\n1ä»¥ä¸Šï¼šã¶ã¤ã‹ã£ãŸåŠ›ã‚ˆã‚Šå¼·ãåç™º\n")]
+    [SerializeField] protected float åç™ºåŠ›; // çƒãŒç‰©ä½“ã¨ã¶ã¤ã‹ã£ãŸã¨ãã«è·³ã­ã‚‹å‹¢ã„ï¼ˆ0 = è·³ã­ãªã„ã€0ï½1 = è·³ã­ã‚‹ã€‚å¾ã€…ã«è·³ã­ã‚‹åŠ›ãŒå¼±ããªã‚‹ 1 = åŒã˜é«˜ã•ã¾ã§è·³ã­ã‚‹ 1ï½ = å¾ã€…ã«è·³ã­ã‚‹é«˜ã•ãŒé«˜ããªã‚‹
+    [Tooltip("\nãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹ã‚ˆã†ã«ãªã‚‹\n")]
+    [SerializeField] protected bool ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å½“ãŸã‚‹ã¨ãƒ€ãƒ¡ãƒ¼ã‚¸ = false;
+    [Tooltip("\nãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹ã¨ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«å‹•ãå‡ºã™\n")]
+    [SerializeField] protected bool ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«å‹•ãå‡ºã™ = false; // ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«çƒãŒå‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
+    [Tooltip("\nãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæŸColliderã®ç¯„å›²å†…ã«å…¥ã£ãŸæ™‚ã«å‹•ãå‡ºã™\n")]
+    [SerializeField] protected bool ç¯„å›²å†…ã«å…¥ã£ãŸã‚‰å‹•ãå‡ºã™ = true; // çƒã®å§‹å‹•ç”¨å½“ãŸã‚Šåˆ¤å®šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ã¦ããŸã‚‰çƒãŒå‹•ãå‡ºã™ã‹å¦ã‹ï¼ˆtrueãªã‚‰å‹•ãã€falseãªã‚‰å‹•ã‹ãªã„ï¼‰
 
-    // ‚â‚â‚±‚µ‚­‚È‚é‚Ì‚ÅAlŠp‚È‚çlŠpA‰~‚È‚ç‰~‚Ì“–‚½‚è”»’è‚ğg—p‚·‚é‘O’ñ‚É‚·‚é
+    // ã‚„ã‚„ã“ã—ããªã‚‹ã®ã§ã€å››è§’ãªã‚‰å››è§’ã€å††ãªã‚‰å††ã®å½“ãŸã‚Šåˆ¤å®šã‚’ä½¿ç”¨ã™ã‚‹å‰æã«ã™ã‚‹
 
-    [Tooltip("\nƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é‚ÆƒvƒŒƒCƒ„[‚ª–^Collider‚Ì”ÍˆÍ“à‚É“ü‚Á‚½‚É“®‚«o‚·\n")]
+    [Tooltip("\nãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæŸColliderã®ç¯„å›²å†…ã«å…¥ã£ãŸæ™‚ã«å‹•ãå‡ºã™\n")]
     [SerializeField] float speed = 1.0f;
     [SerializeField] bool isMove = false;
     
     protected Rigidbody2D rb;
 
-    //private BoxCollider2D groundCollider; // °”»’è—p‚Ì“–‚½‚è”»’è
-    //private BoxCollider2D attackCollider; // UŒ‚”»’è—p‚Ì“–‚½‚è”»’è
-    //private BoxCollider2D moveTriggerCollider; // ”ÍˆÍ“à‚É“ü‚Á‚½‚ç“®‚«o‚·“–‚½‚è”»’è
+    //private BoxCollider2D groundCollider; // åºŠåˆ¤å®šç”¨ã®å½“ãŸã‚Šåˆ¤å®š
+    //private BoxCollider2D attackCollider; // æ”»æ’ƒåˆ¤å®šç”¨ã®å½“ãŸã‚Šåˆ¤å®š
+    //private BoxCollider2D moveTriggerCollider; // ç¯„å›²å†…ã«å…¥ã£ãŸã‚‰å‹•ãå‡ºã™å½“ãŸã‚Šåˆ¤å®š
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // ‚Ü‚¸‚ÍŠeƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìî•ñ‚ğæ“¾
+        // ã¾ãšã¯å„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æƒ…å ±ã‚’å–å¾—
         rb = GetComponent<Rigidbody2D>();
         //groundCollider = transform.Find("GroundCollider").GetComponent<BoxCollider2D>();
         //attackCollider = transform.Find("AttackCollider").GetComponent<BoxCollider2D>();
@@ -43,39 +43,42 @@ public class Object : MonoBehaviour
 
         isMove = true;
 
-        // ”½”­—Í‚ğİ’è
-        rb.sharedMaterial.bounciness = ”½”­—Í;
+        // åç™ºåŠ›ã‚’è¨­å®š
+        rb.sharedMaterial.bounciness = åç™ºåŠ›;
 
-        // autoStart = true‚Ìê‡AƒQ[ƒ€ŠJn’¼Œã‚É‚·‚®“®‚«o‚·
-        // autoStart = false‚Ìê‡AƒQ[ƒ€ŠJn‚Í~‚Ü‚Á‚½ó‘Ô
-        if (ƒQ[ƒ€ŠJn‚É“®‚«o‚·)
+        // autoStart = trueã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹ç›´å¾Œã«ã™ãå‹•ãå‡ºã™
+        // autoStart = falseã®å ´åˆã€ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã¯æ­¢ã¾ã£ãŸçŠ¶æ…‹
+        if (ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«å‹•ãå‡ºã™)
         {
-            rb.linearVelocity = “®‚«n‚ß‚É‚©‚¯‚é—Í;
+            rb.linearVelocity = å‹•ãå§‹ã‚ã«ã‹ã‘ã‚‹åŠ›;
         }
         else
         {
-            // “®‚«o‚³‚È‚¢ê‡‚Í‚»‚Ìê‚ÉŒÅ’è
+            // å‹•ãå‡ºã•ãªã„å ´åˆã¯ãã®å ´ã«å›ºå®š
             rb.bodyType = RigidbodyType2D.Static;
         }
 
-        // canTriggerMove = true‚Ìê‡A“–‚½‚è”»’è“à‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚½‚ç“®‚«o‚·
-        // canTriggerMove = false‚Ìê‡A‚»‚Ì‹…‚Í~‚Ü‚Á‚½‚Ü‚Ü
-        if (!”ÍˆÍ“à‚É“ü‚Á‚½‚ç“®‚«o‚·)
+        // canTriggerMove = trueã®å ´åˆã€å½“ãŸã‚Šåˆ¤å®šå†…ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥ã£ãŸã‚‰å‹•ãå‡ºã™
+        // canTriggerMove = falseã®å ´åˆã€ãã®çƒã¯æ­¢ã¾ã£ãŸã¾ã¾
+        if (!ç¯„å›²å†…ã«å…¥ã£ãŸã‚‰å‹•ãå‡ºã™)
         {
-            // “®‚©‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚ÉBoxCollider2D‚ğ–³Œø‰»‚·‚é
+            // å‹•ã‹ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã«BoxCollider2Dã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             //moveTriggerCollider.enabled = false;
             Destroy(transform.Find("MoveTriggerCollider").gameObject);
-            GetComponent<CircleCollider2D>().enabled = false;
+            //GetComponent<CircleCollider2D>().enabled = false;
         }
 
-        if (ƒvƒŒƒCƒ„[‚É“–‚½‚é‚Æƒ_ƒ[ƒW)
+        // ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šã¯Playerå´ã§è¡Œã„ã€Trapã‚¿ã‚°ã§åˆ¤å®šã™ã‚‹
+        // Trapã‚¿ã‚°ã‚’ã¤ã‘ãŸã¤ã‘ãªã„ã®æ··ä¹±ãŒãªã„ã‚ˆã†ã€ã‚¹ã‚¯ãƒªãƒ—ãƒˆå´ã§æ“ä½œã™ã‚‹
+        if (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å½“ãŸã‚‹ã¨ãƒ€ãƒ¡ãƒ¼ã‚¸)
         {
-            // “–‚½‚è”»’è—p‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ^ƒO‚ğTrap‚É•Ï‚¦‚é
-            transform.Find("AttackCollider").tag = "Trap";
+            // å½“ãŸã‚Šåˆ¤å®šç”¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚°ã‚’Trapã«ã™ã‚‹
+            transform.Find("DamageCollider").tag = "Trap";
         }
         else
         {
-
+            // ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šãŒä¸è¦ãªå ´åˆã¯ã‚¿ã‚°ã‚’Untaggedã«ã™ã‚‹
+            transform.Find("DamageCollider").tag = "Untagged";
         }
     }
 
@@ -85,35 +88,35 @@ public class Object : MonoBehaviour
         
     }
 
-    // role‚Å’n–Ê”»’è‚È‚Ì‚©ƒ_ƒ[ƒW”»’è‚È‚Ì‚©‚ğŒ©‹É‚ß‚é
+    // roleã§åœ°é¢åˆ¤å®šãªã®ã‹ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šãªã®ã‹ã‚’è¦‹æ¥µã‚ã‚‹
     public void OnChildCollisionEnter(string role, Collision2D collision)
     {
         if (role == "Ground")
         {
-            //// ƒvƒŒƒCƒ„[‚ª’N‚©‚Ìq‚Å‚ ‚é‰Â”\«‚ğ”rœ‚·‚é
+            //// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒèª°ã‹ã®å­ã§ã‚ã‚‹å¯èƒ½æ€§ã‚’æ’é™¤ã™ã‚‹
             //collision.gameObject.transform.SetParent(null);
 
-            //// ƒvƒŒƒCƒ„[‚ğq‚É‚·‚é‚±‚Æ‚ÅAGround‘¤‚Ì“®‚«‚Æ“¯Šú‚·‚é
+            //// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å­ã«ã™ã‚‹ã“ã¨ã§ã€Groundå´ã®å‹•ãã¨åŒæœŸã™ã‚‹
             //collision.gameObject.transform.SetParent(transform, false);
 
-            //// ˆÊ’uŠÖŒW‚ğ’²®
+            //// ä½ç½®é–¢ä¿‚ã‚’èª¿æ•´
             //collision.gameObject.transform.position -= transform.position;
 
 
-            // ƒvƒŒƒCƒ„[‚ğq‚É‚·‚é‚±‚Æ‚ÅAGround‘¤‚Ì“®‚«‚Æ“¯Šú‚·‚é
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å­ã«ã™ã‚‹ã“ã¨ã§ã€Groundå´ã®å‹•ãã¨åŒæœŸã™ã‚‹
             collision.gameObject.transform.SetParent(transform);
         }
     }
 
-    // role‚Å’n–Ê”»’è‚È‚Ì‚©ƒ_ƒ[ƒW”»’è‚È‚Ì‚©‚ğŒ©‹É‚ß‚é
+    // roleã§åœ°é¢åˆ¤å®šãªã®ã‹ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šãªã®ã‹ã‚’è¦‹æ¥µã‚ã‚‹
     public void OnChildCollisionExit(string role, Collision2D collision)
     {
-        // ’n–Ê‚©‚ç—£‚ê‚½‚ÉAƒvƒŒƒCƒ„[‚Æ‚Ì“¯Šú‚ğ‰ğœ‚·‚é
+        // åœ°é¢ã‹ã‚‰é›¢ã‚ŒãŸæ™‚ã«ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®åŒæœŸã‚’è§£é™¤ã™ã‚‹
         if (role == "Ground" && gameObject.activeInHierarchy)
         {
             collision.gameObject.transform.SetParent(null);
         }
 
-        // V‚µ‚¢ƒXƒNƒŠƒvƒg‚ğì‚Á‚ÄA“–‚½‚è”»’è‚Í‚»‚¿‚ç‚É”C‚¹‚é
+        // æ–°ã—ã„ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ä½œã£ã¦ã€å½“ãŸã‚Šåˆ¤å®šã¯ãã¡ã‚‰ã«ä»»ã›ã‚‹
     }
 }
