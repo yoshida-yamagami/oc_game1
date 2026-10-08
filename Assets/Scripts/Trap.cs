@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using UnityEngine;
 
-public class Trap : BaseObject
+public class Trap : MonoBehaviour
 {
     // オブジェクトを構成するパーツを表示しない
     private void OnValidate()

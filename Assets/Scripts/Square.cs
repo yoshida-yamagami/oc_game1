@@ -18,13 +18,4 @@ public class Square : BaseObject
     //{
     //    //isMove = true;
     //}
-
-    void FixedUpdate()
-    {
-        //// 動作フラグがオンの場合は指定方向に動く
-        //if (isMove)
-        //{
-        //    gameObject.transform.position += new Vector3(speed / 100, 0, 0);
-        //}
-    }
 }

@@ -136,13 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8cff1268c4fc047bdd7d4b2be4df8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  "\u52D5\u304D\u59CB\u3081\u306B\u304B\u3051\u308B\u529B": {x: 0, y: 0}
-  "\u53CD\u767A\u529B": 0
-  "\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u5F53\u305F\u308B\u3068\u30C0\u30E1\u30FC\u30B8": 0
-  "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306B\u52D5\u304D\u51FA\u3059": 0
-  "\u7BC4\u56F2\u5185\u306B\u5165\u3063\u305F\u3089\u52D5\u304D\u51FA\u3059": 1
-  speed: 1
-  isMove: 0
 --- !u!1 &49154201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5920737141672433187, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
@@ -1333,13 +1326,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0e984597a5ca54593eafb10aa0563f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Squaretest
-  "\u52D5\u304D\u59CB\u3081\u306B\u304B\u3051\u308B\u529B": {x: 0, y: 2}
-  "\u53CD\u767A\u529B": 0
-  "\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u5F53\u305F\u308B\u3068\u30C0\u30E1\u30FC\u30B8": 1
-  "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306B\u52D5\u304D\u51FA\u3059": 0
-  "\u7BC4\u56F2\u5185\u306B\u5165\u3063\u305F\u3089\u52D5\u304D\u51FA\u3059": 0
-  speed: 1
-  isMove: 0
+  isDamageObject: 0
+  movementTriggerType: 1
+  movementPatternType: 1
+  initialForce: {x: 0, y: 0}
+  reboundForce: 0
+  moveSpeed: {x: 1, y: 1}
+  moveLength: 100
+  isTurn: 1
 --- !u!212 &1464355585
 SpriteRenderer:
   serializedVersion: 2
@@ -1408,7 +1402,7 @@ Transform:
   m_GameObject: {fileID: 1464355583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.04, y: 1.61, z: 0}
+  m_LocalPosition: {x: -6, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1425,7 +1419,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464355583}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -2182,13 +2176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b944d96f37f1d64fba40b986eed32b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ball
-  "\u52D5\u304D\u59CB\u3081\u306B\u304B\u3051\u308B\u529B": {x: 10, y: 0}
-  "\u53CD\u767A\u529B": 0
-  "\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u5F53\u305F\u308B\u3068\u30C0\u30E1\u30FC\u30B8": 0
-  "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306B\u52D5\u304D\u51FA\u3059": 0
-  "\u7BC4\u56F2\u5185\u306B\u5165\u3063\u305F\u3089\u52D5\u304D\u51FA\u3059": 0
-  speed: 1
-  isMove: 0
 --- !u!1001 &8147013606199856193
 PrefabInstance:
   m_ObjectHideFlags: 0

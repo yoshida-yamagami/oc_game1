@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class Coin : BaseObject
+public class Coin : MonoBehaviour
 {
 }

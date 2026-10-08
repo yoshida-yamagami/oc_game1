@@ -90,7 +90,19 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        rb.linearVelocity = new Vector2(speed, rb.linearVelocityY);
+        // ★ 親（床）の速度を取得して合算する
+        float parentVelocityX = 0f;
+        if (transform.parent != null)
+        {
+            Rigidbody2D parentRb = transform.parent.GetComponent<Rigidbody2D>();
+            if (parentRb != null)
+            {
+                parentVelocityX = parentRb.linearVelocity.x;
+            }
+        }
+
+        // 自分の入力移動速度（speed）に床の移動速度（parentVelocityX）を加算
+        rb.linearVelocity = new Vector2(speed + parentVelocityX, rb.linearVelocityY);
     }
     
     /// <summary>
