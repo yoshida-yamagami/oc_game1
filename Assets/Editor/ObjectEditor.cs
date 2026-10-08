@@ -136,13 +136,6 @@ public class ObjectEditor : Editor
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
 
-        /*
-             private SerializedProperty moveSpeedProp;       // 移動速度設定
-    private SerializedProperty moveLengthProp;      // 移動距離設定
-    private SerializedProperty turnProp;            // 折り返し設定
-
-         */
-
         // 変更を確定して適用
         serializedObject.ApplyModifiedProperties();
     }

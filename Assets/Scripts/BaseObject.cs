@@ -42,8 +42,10 @@ public class BaseObject : MonoBehaviour
 
     // この下は使用する
     private bool isMove = false;
-    private float moveDistance = 0f;
-    
+
+    private Vector3 startPosition;
+    private Vector2 moveDirection;
+
     protected Rigidbody2D rb;
 
     /// <summary>
@@ -75,9 +77,6 @@ public class BaseObject : MonoBehaviour
         rb.linearVelocity = moveSpeed;
         rb.sharedMaterial.bounciness = 0f; // 反発力を設定
     }
-
-    private Vector3 startPosition;
-    private Vector2 moveDirection;
     
     void Start()
     {
@@ -132,9 +131,19 @@ public class BaseObject : MonoBehaviour
         float movedDistance = Vector3.Distance(startPosition, transform.position); // 現在の移動距離を計算
         if (movedDistance >= moveLength)
         {
-            // 指定距離に達したら停止
-            rb.linearVelocity = Vector2.zero;
-            isMove = false;
+            if (isTurn)
+            {
+                // 折り返し設定があれば折り返す
+                startPosition = transform.position; // 現在地をスタート地点とする
+                moveSpeed *= -1; // 移動速度を反転
+                SetConstantSpeed(); // 設定しなおした状態で再度セット
+            }
+            else
+            {
+                // 指定距離に達したら停止
+                rb.linearVelocity = Vector2.zero;
+                isMove = false;
+            }
         }
         else
         {
