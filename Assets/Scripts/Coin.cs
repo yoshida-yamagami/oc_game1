@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class Coin : Object
+public class Coin : BaseObject
 {
 }

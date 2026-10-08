@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Goal : Object
+public class Goal : BaseObject
 {
     void Start()
     {

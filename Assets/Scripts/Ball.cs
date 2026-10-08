@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Ball : Object
+public class Ball : BaseObject
 {
     //private Rigidbody2D rb;
 
@@ -51,7 +51,7 @@ public class Ball : Object
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
             // 指定方向に力をかける
-            rb.linearVelocity = 動き始めにかける力;
+            rb.linearVelocity = initialForce;
         }
     }
 }

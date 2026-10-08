@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Square2 : Object
+public class Square2 : BaseObject
 {
     [SerializeField] GameObject body;
     [SerializeField] SquareBody bodyScript;
