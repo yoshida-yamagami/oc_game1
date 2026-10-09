@@ -1,16 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveTriggerCollider : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// プレイヤーが当たり判定内に侵入したら発動
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.gameObject.tag == "Player")
+        {
+            gameObject.GetComponentInParent<BaseObject>().SetMove();
+        }
     }
 }

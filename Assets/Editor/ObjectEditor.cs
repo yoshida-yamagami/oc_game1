@@ -43,7 +43,7 @@ public class ObjectEditor : Editor
         movementTriggerProp = serializedObject.FindProperty("movementTriggerType");
         movementPatternProp = serializedObject.FindProperty("movementPatternType");
         forceProp = serializedObject.FindProperty("initialForce");
-        bounceProp = serializedObject.FindProperty("reboundForce");
+        bounceProp = serializedObject.FindProperty("bounciness");
         moveSpeedProp = serializedObject.FindProperty("moveSpeed");
         moveLengthProp = serializedObject.FindProperty("moveLength");
         turnProp = serializedObject.FindProperty("isTurn");
@@ -120,7 +120,7 @@ public class ObjectEditor : Editor
         // --------------------------------------------------
         // グループ: 動き方B（一定速度で動く）の制御
         // --------------------------------------------------
-        showMovementPatternBControl = EditorGUILayout.BeginFoldoutHeaderGroup(showMovementPatternBControl, "動き出しのみ力を入れる場合の制御");
+        showMovementPatternBControl = EditorGUILayout.BeginFoldoutHeaderGroup(showMovementPatternBControl, "一定速度で動く場合の制御");
         if (showMovementPatternBControl)
         {
             EditorGUI.indentLevel++;

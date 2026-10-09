@@ -2,9 +2,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// ゲーム内オブジェクトの祖
-/// </summary>
 public class BaseObject : MonoBehaviour
 {
     // オブジェクトが動き出すタイミングを定義
@@ -30,7 +27,7 @@ public class BaseObject : MonoBehaviour
     [SerializeField] protected MovementPattern movementPatternType; // 動き方の設定
     // 動き始めのみ力をかける場合の設定
     [SerializeField] protected Vector2 initialForce; // 動き始めにかける力
-    [SerializeField] protected float reboundForce;   // 球が物体とぶつかったときに跳ねる勢い（0 = 跳ねない、0～1 = 跳ねる。徐々に跳ねる力が弱くなる 1 = 同じ高さまで跳ねる 1～ = 徐々に跳ねる高さが高くなる
+    [SerializeField] protected float bounciness;   // 球が物体とぶつかったときに跳ねる勢い（0 = 跳ねない、0～1 = 跳ねる。徐々に跳ねる力が弱くなる 1 = 同じ高さまで跳ねる 1～ = 徐々に跳ねる高さが高くなる
     // 一定速度で移動する場合の設定
     [SerializeField] protected Vector2 moveSpeed;    // 移動速度
     [SerializeField] protected float moveLength;     // 球が物体とぶつかったときに跳ねる勢い（0 = 跳ねない、0～1 = 跳ねる。徐々に跳ねる力が弱くなる 1 = 同じ高さまで跳ねる 1～ = 徐々に跳ねる高さが高くなる
@@ -58,13 +55,30 @@ public class BaseObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 動き方の設定を見て適切な情報を反映する
+    /// </summary>
+    public void SetMove()
+    {
+        if (movementPatternType == MovementPattern.FirstForceOnly)
+        {// 動き始めのみ力をかける場合
+            SetFirstForce();
+        }
+        else if (movementPatternType == MovementPattern.ConstantSpeed)
+        {// 一定速度で移動する場合
+            SetConstantSpeed();
+        }
+    }
+
+    /// <summary>
     /// 動き始めのみ力を与える設定
     /// </summary>
     private void SetFirstForce()
     {
-        isMove = true;
-        rb.linearVelocity = initialForce;
-        rb.sharedMaterial.bounciness = reboundForce; // 反発力を設定
+        isMove = false; // trueにしてしまうと一定速度で移動してしまう。念のためこちらでも設定
+        rb.bodyType = RigidbodyType2D.Dynamic; // 力を与えるので物理法則を有効化
+        // 瞬間的な衝撃（インパルス）を加える
+        rb.AddForce(initialForce, ForceMode2D.Impulse);
+        rb.sharedMaterial.bounciness = bounciness; // 反発力を設定
     }
 
     /// <summary>
@@ -74,36 +88,36 @@ public class BaseObject : MonoBehaviour
     {
         isMove = true;
         moveDirection = moveSpeed.normalized;
+        rb.bodyType = RigidbodyType2D.Kinematic; // 一定の力を与え続けるのでキネマティックオン
         rb.linearVelocity = moveSpeed;
         rb.sharedMaterial.bounciness = 0f; // 反発力を設定
     }
     
     void Start()
     {
+        isMove = false;
         startPosition = transform.position; // 移動開始時の位置を記憶
 
         // まずは各コンポーネントの情報を取得
         rb = GetComponent<Rigidbody2D>();
 
-        // 範囲内に入ったら動き出す場合はStart関数内でやることは特になし
+        // 範囲内に入ったら動き出す場合、Start関数内でやることは特になし
         // movementTriggerType.HasFlag(MovementTrigger.AreaTrigger)
 
-        // autoStart = trueの場合、ゲーム開始直後にすぐ動き出す
-        // autoStart = falseの場合、ゲーム開始時は止まった状態
-        if (movementTriggerType.HasFlag(MovementTrigger.GameStart))
+        // ゲーム開始時に動く設定にした場合、インスペクタの設定に従って適切に情報を反映
+        if (movementTriggerType == MovementTrigger.GameStart)
         {
-            if (movementPatternType == MovementPattern.FirstForceOnly)
-            {
-                SetFirstForce();
-            }
-            else if (movementPatternType == MovementPattern.ConstantSpeed)
-            {
-                SetConstantSpeed();
-            }
+            SetMove();
+        }
+
+        // 動かない設定担っている場合は、ここでオブジェクトをstaticにする
+        if (movementTriggerType == MovementTrigger.None)
+        {
+            SetNoMove();
         }
 
         // 範囲内に入ったら動く設定でなければ、無駄なオブジェクトを取り除く
-        if (movementTriggerType.HasFlag(MovementTrigger.AreaTrigger))
+        if (movementTriggerType != MovementTrigger.AreaTrigger)
         {
             Destroy(transform.Find("MoveTriggerCollider").gameObject);
         }
