@@ -45,54 +45,6 @@ public class BaseObject : MonoBehaviour
 
     protected Rigidbody2D rb;
 
-    /// <summary>
-    /// オブジェクトを移動しないように設定
-    /// </summary>
-    private void SetNoMove()
-    {
-        // 動き出さない場合はその場に固定
-        rb.bodyType = RigidbodyType2D.Static;
-    }
-
-    /// <summary>
-    /// 動き方の設定を見て適切な情報を反映する
-    /// </summary>
-    public void SetMove()
-    {
-        if (movementPatternType == MovementPattern.FirstForceOnly)
-        {// 動き始めのみ力をかける場合
-            SetFirstForce();
-        }
-        else if (movementPatternType == MovementPattern.ConstantSpeed)
-        {// 一定速度で移動する場合
-            SetConstantSpeed();
-        }
-    }
-
-    /// <summary>
-    /// 動き始めのみ力を与える設定
-    /// </summary>
-    private void SetFirstForce()
-    {
-        isMove = false; // trueにしてしまうと一定速度で移動してしまう。念のためこちらでも設定
-        rb.bodyType = RigidbodyType2D.Dynamic; // 力を与えるので物理法則を有効化
-        // 瞬間的な衝撃（インパルス）を加える
-        rb.AddForce(initialForce, ForceMode2D.Impulse);
-        rb.sharedMaterial.bounciness = bounciness; // 反発力を設定
-    }
-
-    /// <summary>
-    /// 一定速度で移動する設定
-    /// </summary>
-    private void SetConstantSpeed()
-    {
-        isMove = true;
-        moveDirection = moveSpeed.normalized;
-        rb.bodyType = RigidbodyType2D.Kinematic; // 一定の力を与え続けるのでキネマティックオン
-        rb.linearVelocity = moveSpeed;
-        rb.sharedMaterial.bounciness = 0f; // 反発力を設定
-    }
-    
     void Start()
     {
         isMove = false;
@@ -165,5 +117,53 @@ public class BaseObject : MonoBehaviour
             Vector2 nextPosition = rb.position + (moveSpeed * Time.fixedDeltaTime);
             rb.MovePosition(nextPosition);
         }
+    }
+
+    /// <summary>
+    /// オブジェクトを移動しないように設定
+    /// </summary>
+    private void SetNoMove()
+    {
+        // 動き出さない場合はその場に固定
+        rb.bodyType = RigidbodyType2D.Static;
+    }
+
+    /// <summary>
+    /// 動き方の設定を見て適切な情報を反映する
+    /// </summary>
+    public void SetMove()
+    {
+        if (movementPatternType == MovementPattern.FirstForceOnly)
+        {// 動き始めのみ力をかける場合
+            SetFirstForce();
+        }
+        else if (movementPatternType == MovementPattern.ConstantSpeed)
+        {// 一定速度で移動する場合
+            SetConstantSpeed();
+        }
+    }
+
+    /// <summary>
+    /// 動き始めのみ力を与える設定
+    /// </summary>
+    private void SetFirstForce()
+    {
+        isMove = false; // trueにしてしまうと一定速度で移動してしまう。念のためこちらでも設定
+        rb.bodyType = RigidbodyType2D.Dynamic; // 力を与えるので物理法則を有効化
+        // 瞬間的な衝撃（インパルス）を加える
+        rb.AddForce(initialForce, ForceMode2D.Impulse);
+        rb.sharedMaterial.bounciness = bounciness; // 反発力を設定
+    }
+
+    /// <summary>
+    /// 一定速度で移動する設定
+    /// </summary>
+    private void SetConstantSpeed()
+    {
+        isMove = true;
+        moveDirection = moveSpeed.normalized;
+        rb.bodyType = RigidbodyType2D.Kinematic; // 一定の力を与え続けるのでキネマティックオン
+        rb.linearVelocity = moveSpeed;
+        rb.sharedMaterial.bounciness = 0f; // 反発力を設定
     }
 }

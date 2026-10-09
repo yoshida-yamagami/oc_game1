@@ -19,7 +19,7 @@ public class GameDirector : MonoBehaviour
         restartButton.SetActive(false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (resetCount > 0)
         {
@@ -40,7 +40,7 @@ public class GameDirector : MonoBehaviour
         restartButton.SetActive(true);
 
         // ゲームリセットまでのカウンターセット
-        resetCount = 180; // 1秒60想定。3秒でゲームリセット
+        resetCount = 50; // 1秒60想定。3秒でゲームリセット
     }
 
     public void GameClear()
@@ -50,7 +50,7 @@ public class GameDirector : MonoBehaviour
         restartButton.SetActive(true);
 
         // ゲームリセットまでのカウンターセット
-        resetCount = 180; // 1秒60想定。3秒でゲームリセット
+        resetCount = 50; // 1秒60想定。3秒でゲームリセット
     }
 
     public void Restart()

@@ -3,12 +3,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
+/// 四角い形の床判定用
 /// いったん床判定はしっかりできた。
 /// 負荷軽減として、動かない床はFixedUpdateがいらないかもね、という話。
 /// その対応は後回しにして、とりあえず次はトラップの整理を優先。
 /// </summary>
 
-public class GroundCollider : MonoBehaviour
+public class BoxGroundCollider : MonoBehaviour
 {
     private BoxCollider2D collider; // 地面の当たり判定
     private LayerMask playerLayer; // Playerレイヤーを設定
