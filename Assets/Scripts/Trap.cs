@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class Trap : BaseObject
 {
     // オブジェクトを構成するパーツを表示しない
     private void OnValidate()
@@ -13,7 +13,7 @@ public class Trap : MonoBehaviour
             if (child.gameObject.name == "Parts")
             {
                 child.gameObject.hideFlags = HideFlags.HideInHierarchy;
-                //child.gameObject.hideFlags = HideFlags.None; 表示したい場合はこの行を使用
+                //child.gameObject.hideFlags = HideFlags.None; //表示したい場合はこの行を使用
             }
         }
     }

@@ -62,7 +62,7 @@ public class BaseObject : MonoBehaviour
             SetMove();
         }
 
-        // 動かない設定担っている場合は、ここでオブジェクトをstaticにする
+        // 動かない設定になっている場合は、ここでオブジェクトをstaticにする
         if (movementTriggerType == MovementTrigger.None)
         {
             SetNoMove();
@@ -76,13 +76,14 @@ public class BaseObject : MonoBehaviour
 
         // ダメージ判定はPlayer側で行い、Trapタグで判定する
         // Trapタグをつけたつけないの混乱がないよう、スクリプト側で操作する
+        Transform damageCollider = transform.Find("DamageCollider");
         if (isDamageObject)
         {
-            transform.Find("DamageCollider").tag = "Trap";
+            damageCollider.tag = "Trap";
         }
         else
         {
-            transform.Find("DamageCollider").tag = "Untagged";
+            damageCollider.tag = "Untagged";
         }
     }
 
@@ -150,9 +151,11 @@ public class BaseObject : MonoBehaviour
     {
         isMove = false; // trueにしてしまうと一定速度で移動してしまう。念のためこちらでも設定
         rb.bodyType = RigidbodyType2D.Dynamic; // 力を与えるので物理法則を有効化
-        // 瞬間的な衝撃（インパルス）を加える
-        rb.AddForce(initialForce, ForceMode2D.Impulse);
+        rb.AddForce(initialForce, ForceMode2D.Impulse); // 瞬間的な衝撃（インパルス）を加える
         rb.sharedMaterial.bounciness = bounciness; // 反発力を設定
+
+        // 複数回動かないよう、ここでMoveTriggerColliderを削除する
+        Destroy(transform.Find("MoveTriggerCollider").gameObject);
     }
 
     /// <summary>
