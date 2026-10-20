@@ -33,10 +33,6 @@ public class BaseObject : MonoBehaviour
     [SerializeField] protected float moveLength;     // 球が物体とぶつかったときに跳ねる勢い（0 = 跳ねない、0～1 = 跳ねる。徐々に跳ねる力が弱くなる 1 = 同じ高さまで跳ねる 1～ = 徐々に跳ねる高さが高くなる
     [SerializeField] protected bool isTurn;          // 
 
-    // オブジェクトが動く設定にした場合に使用する
-    // これらは後々削除する
-    private float speed = 1.0f;
-
     // この下は使用する
     private bool isMove = false;
 

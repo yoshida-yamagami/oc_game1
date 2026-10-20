@@ -8,7 +8,7 @@ public class GameDirector : MonoBehaviour
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject restartButton;
 
-    private bool isClear = false;
+    //private bool isClear = false;
     private int resetCount = -1; // 非稼働時は-1。数値がセットされるとカウントダウン、0になるとシーンリセット実行
 
     void Start()

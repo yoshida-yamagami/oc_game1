@@ -10,13 +10,13 @@ using UnityEngine;
 
 public class CircleGroundCollider : MonoBehaviour
 {
-    private CircleCollider2D collider; // 地面の当たり判定
+    private CircleCollider2D groundCollider; // 地面の当たり判定
     private LayerMask playerLayer; // Playerレイヤーを設定
     private bool hasPlayer = false;
 
     private void Start()
     {
-        collider = GetComponent<CircleCollider2D>();
+        groundCollider = GetComponent<CircleCollider2D>();
         playerLayer = LayerMask.GetMask("Player"); // Playerレイヤーをプレイヤーと認識
     }
 
@@ -28,7 +28,7 @@ public class CircleGroundCollider : MonoBehaviour
         //RaycastHit2D hit = Physics2D.BoxCast(transform.position, size, 0f, Vector2.up, 0.1f, playerLayer);
 
         // 1. コライダーの上面（Top）の位置を計算
-        Bounds bounds = collider.bounds;
+        Bounds bounds = groundCollider.bounds;
         Vector2 origin = new Vector2(bounds.center.x, bounds.max.y);
 
         // 2. センサーのサイズ（幅はコライダーと同じ、高さは薄い判定ラインにする）
