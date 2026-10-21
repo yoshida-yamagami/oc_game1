@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private bool canMove = true; // 行動可否判定
 
     // 地面との当たり判定に使用
-    Vector3 groundCheckOffset = new Vector3(0.3f, 0.3f, 0); // 左右の幅0.3、下方向へ0.3
+    Vector3 groundCheckOffset = new Vector3(0.5f, 0.4f, 0); // 左右の幅0.3、下方向へ0.3
     float groundCheckDistance = 0.3f; // デバッグ用の線の長さ指定
     private bool isGrounded; // 現在接地しているかどうかを保持する変数（Gizmosでの色分けに使用）
     private int noInputTime = 0; // ジャンプ直後の誤判定を防ぐため、入力受付不可時間を設定
@@ -154,12 +154,15 @@ public class Player : MonoBehaviour
     private bool IsGround()
     {
         Vector3 leftStart = transform.position + new Vector3(-groundCheckOffset.x, -groundCheckOffset.y, 0);
+        Vector3 centerStart = transform.position + new Vector3(0, -groundCheckOffset.y, 0); ;
         Vector3 rightStart = transform.position + new Vector3(groundCheckOffset.x, -groundCheckOffset.y, 0);
         Vector3 leftEnd = leftStart - Vector3.up * groundCheckDistance;
+        Vector3 centerEnd = centerStart - Vector3.up * groundCheckDistance;
         Vector3 rightEnd = rightStart - Vector3.up * groundCheckDistance;
 
         // Linecast実行
         RaycastHit2D hitL = Physics2D.Linecast(leftStart, leftEnd, groundLayer);
+        RaycastHit2D hitC = Physics2D.Linecast(centerStart, centerEnd, groundLayer);
         RaycastHit2D hitR = Physics2D.Linecast(rightStart, rightEnd, groundLayer);
 
         bool grounded = false;
@@ -171,13 +174,14 @@ public class Player : MonoBehaviour
         else
         {
             // 接地判定
-            grounded = hitL.collider != null || hitR.collider != null;
+            grounded = hitL.collider != null || hitC.collider != null || hitR.collider != null;
         }
 
         // --- 1. 判定時のみ色を変える (Debug.DrawLine) ---
         // 接地していたら緑、浮いていたら赤
         Color lineColor = grounded ? Color.green : Color.red;
         Debug.DrawLine(leftStart, leftEnd, lineColor);
+        Debug.DrawLine(centerStart, centerEnd, lineColor);
         Debug.DrawLine(rightStart, rightEnd, lineColor);
 
         return grounded;
@@ -199,10 +203,12 @@ public class Player : MonoBehaviour
 
         // 判定位置を計算（Update内の計算と同じにする）
         Vector3 leftStart = transform.position + new Vector3(-groundCheckOffset.x, -groundCheckOffset.y, 0);
+        Vector3 centerStart = transform.position + new Vector3(0, -groundCheckOffset.y, 0); ;
         Vector3 rightStart = transform.position + new Vector3(groundCheckOffset.x, -groundCheckOffset.y, 0);
 
         // ギズモとして線を描画
         Gizmos.DrawLine(leftStart, leftStart - Vector3.up * groundCheckDistance);
+        Gizmos.DrawLine(centerStart, centerStart - Vector3.up * groundCheckDistance);
         Gizmos.DrawLine(rightStart, rightStart - Vector3.up * groundCheckDistance);
     }
 

@@ -35,7 +35,7 @@ public class ObjectEditor : Editor
     private SerializedProperty moveLengthProp;      // 移動距離設定
     private SerializedProperty turnProp;            // 折り返し設定
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         // 各変数のプロパティを取得
         damageProp = serializedObject.FindProperty("isDamageObject");

@@ -41,7 +41,7 @@ public class BaseObject : MonoBehaviour
 
     protected Rigidbody2D rb;
 
-    void Start()
+    protected virtual void Start()
     {
         isMove = false;
         startPosition = transform.position; // 移動開始時の位置を記憶
@@ -71,15 +71,16 @@ public class BaseObject : MonoBehaviour
         }
 
         // ダメージ判定はPlayer側で行い、Trapタグで判定する
-        // Trapタグをつけたつけないの混乱がないよう、スクリプト側で操作する
         Transform damageCollider = transform.Find("DamageCollider");
         if (isDamageObject)
         {
+            // Trapタグをつけたつけないの混乱がないよう、スクリプト側で操作する
             damageCollider.tag = "Trap";
         }
         else
         {
-            damageCollider.tag = "Untagged";
+            // ダメージ判定が不要であれば、無駄なオブジェクトを取り除く
+            Destroy(damageCollider.gameObject);
         }
     }
 
