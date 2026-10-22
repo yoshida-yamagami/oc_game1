@@ -1,46 +1,46 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(Coin), true)]
 public class CoinEditor : ObjectEditor
 {
-    // ƒOƒ‹[ƒv‚ÌŠJ•Âó‘Ô‚ğ‹L‰¯‚·‚é•Ï”
+    // ã‚°ãƒ«ãƒ¼ãƒ—ã®é–‹é–‰çŠ¶æ…‹ã‚’è¨˜æ†¶ã™ã‚‹å¤‰æ•°
     private static bool showCoinSettings = true;
 
-    // ƒRƒCƒ“‚ÌƒIƒuƒWƒFƒNƒg‚©‚Ç‚¤‚©‚Ìİ’è
+    // ã‚³ã‚¤ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã©ã†ã‹ã®è¨­å®š
     private SerializedProperty coinProp;
 
     protected override void OnEnable()
     {
-        // ƒvƒƒpƒeƒB‚ğæ“¾
+        // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å–å¾—
         coinProp = serializedObject.FindProperty("isCoinObject");
 
-        // eƒNƒ‰ƒX‚Ìˆ—‚ğÀs
+        // è¦ªã‚¯ãƒ©ã‚¹ã®å‡¦ç†ã‚’å®Ÿè¡Œ
         base.OnEnable();
     }
 
     public override void OnInspectorGUI()
     {
-        // ƒf[ƒ^‚ğÅV‚Ìó‘Ô‚ÉXV
+        // ãƒ‡ãƒ¼ã‚¿ã‚’æœ€æ–°ã®çŠ¶æ…‹ã«æ›´æ–°
         serializedObject.Update();
 
         // -----------------------
-        // ƒOƒ‹[ƒv: ƒ_ƒ[ƒW‚ÌƒIƒ“ƒIƒt
+        // ã‚°ãƒ«ãƒ¼ãƒ—: ãƒ€ãƒ¡ãƒ¼ã‚¸ã®ã‚ªãƒ³ã‚ªãƒ•
         // --------------------------------------------------
-        showCoinSettings = EditorGUILayout.BeginFoldoutHeaderGroup(showCoinSettings, "ƒRƒCƒ“İ’è");
+        showCoinSettings = EditorGUILayout.BeginFoldoutHeaderGroup(showCoinSettings, "Coinå›ºæœ‰è¨­å®š");
         if (showCoinSettings)
         {
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(coinProp, new GUIContent("ƒRƒCƒ“‚Æ‚µ‚Äæ“¾‰Â”\", "ƒRƒCƒ“‚Æ‚µ‚Äæ“¾‰Â”\\n\nƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é‚ÆA‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÉƒvƒŒƒCƒ„[‚ªG‚ê‚é‚ÆƒRƒCƒ“‚Æ‚µ‚ÄŠl“¾‚Å‚«‚é‚æ‚¤‚É‚È‚é"));
+            EditorGUILayout.PropertyField(coinProp, new GUIContent("ã‚³ã‚¤ãƒ³ã¨ã—ã¦å–å¾—å¯èƒ½", "ã‚³ã‚¤ãƒ³ã¨ã—ã¦å–å¾—å¯èƒ½\n\nãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹ã¨ã€ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè§¦ã‚Œã‚‹ã¨ã‚³ã‚¤ãƒ³ã¨ã—ã¦ç²å¾—ã§ãã‚‹ã‚ˆã†ã«ãªã‚‹"));
             EditorGUI.indentLevel--;
         }
 
         EditorGUILayout.EndFoldoutHeaderGroup();
 
-        // •ÏX‚ğŠm’è‚µ‚Ä“K—p
+        // å¤‰æ›´ã‚’ç¢ºå®šã—ã¦é©ç”¨
         serializedObject.ApplyModifiedProperties();
 
-        // eƒNƒ‰ƒX‚Ìˆ—‚ğÀs
+        // è¦ªã‚¯ãƒ©ã‚¹ã®å‡¦ç†ã‚’å®Ÿè¡Œ
         base.OnInspectorGUI();
     }
 }

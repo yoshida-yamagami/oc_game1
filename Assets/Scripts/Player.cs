@@ -266,6 +266,9 @@ public class Player : MonoBehaviour
         // コインに接触したらコインを取得
         if (collision.gameObject.tag == "Coin")
         {
+            // コインを取得する際、プレイヤーがコインの子オブジェクトになっているとプレイヤーも消されてしまう
+            // なので、コインを取る前にプレイヤーの親情報をリセット
+            transform.SetParent(null);
             Destroy(collision.gameObject);
         }
     }

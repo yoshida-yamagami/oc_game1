@@ -136,7 +136,17 @@ public class ObjectEditor : Editor
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
 
-        // 変更を確定して適用
-        serializedObject.ApplyModifiedProperties();
+        // 変更を確定させ、もし値に変更があれば true が返る
+        if (serializedObject.ApplyModifiedProperties())
+        {
+            // ターゲットとなっている BaseObject のインスタンスを取得して即座にサイズ更新を呼び出す
+            BaseObject baseObj = (BaseObject)target;
+            if (baseObj != null)
+            {
+                baseObj.UpdateColliderSizes();
+                // Sceneビューの描画を即座に更新する
+                EditorUtility.SetDirty(baseObj);
+            }
+        }
     }
 }

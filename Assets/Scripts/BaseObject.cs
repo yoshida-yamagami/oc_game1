@@ -35,11 +35,13 @@ public class BaseObject : MonoBehaviour
 
     // この下は使用する
     private bool isMove = false;
-
     private Vector3 startPosition;
-    private Vector2 moveDirection;
 
     protected Rigidbody2D rb;
+
+    public virtual void UpdateColliderSizes()
+    {
+    }
 
     protected virtual void Start()
     {
@@ -161,7 +163,6 @@ public class BaseObject : MonoBehaviour
     private void SetConstantSpeed()
     {
         isMove = true;
-        moveDirection = moveSpeed.normalized;
         rb.bodyType = RigidbodyType2D.Kinematic; // 一定の力を与え続けるのでキネマティックオン
         rb.linearVelocity = moveSpeed;
         rb.sharedMaterial.bounciness = 0f; // 反発力を設定
