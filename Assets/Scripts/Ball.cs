@@ -30,5 +30,7 @@ public class Ball : BaseObject
         {
             transform.localScale = new Vector3(ballSize, ballSize, 1f);
         }
+
+        base.UpdateColliderSizes();
     }
 }

@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private int noInputTime = 0; // ジャンプ直後の誤判定を防ぐため、入力受付不可時間を設定
 
     private SpriteRenderer spriteRenderer; // ★追加
+
     void Start()
     {
         gameDirectorScript = GameObject.Find("GameDirector").GetComponent<GameDirector>();
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
 
         groundLayer = LayerMask.GetMask("Ground"); // Groundレイヤーを床と認識
 
-        spriteRenderer = GetComponent<SpriteRenderer>(); // ★追加
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()

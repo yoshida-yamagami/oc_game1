@@ -65,5 +65,7 @@ public class Square : BaseObject
                 damageCollider.size = newSize;
             }
         }
+
+        base.UpdateColliderSizes();
     }
 }

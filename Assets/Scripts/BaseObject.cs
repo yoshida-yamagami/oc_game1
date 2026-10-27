@@ -24,6 +24,8 @@ public class BaseObject : MonoBehaviour
     /// </summary>
     [SerializeField] protected bool isDamageObject = false; // プレイヤーに触れた時にダメージを受けるかどうか
     [SerializeField] protected MovementTrigger movementTriggerType; // 動き出すタイミングの設定
+    [SerializeField] protected Vector2 triggerAreaPosition; // 動き出すトリガーとなる範囲の位置設定
+    [SerializeField] protected Vector2 triggerAreaSize; // 動き出すトリガーとなる範囲のサイズ設定
     [SerializeField] protected MovementPattern movementPatternType; // 動き方の設定
     // 動き始めのみ力をかける場合の設定
     [SerializeField] protected Vector2 initialForce; // 動き始めにかける力
@@ -41,6 +43,21 @@ public class BaseObject : MonoBehaviour
 
     public virtual void UpdateColliderSizes()
     {
+        // 範囲内に入ったら動き出す設定の判定に使用するBoxCollider2Dの設定を同期
+        Transform moveTriggerChild = transform.Find("MoveTriggerCollider");
+        if (moveTriggerChild != null)
+        {
+            BoxCollider2D moveTriggerCollider = moveTriggerChild.GetComponent<BoxCollider2D>();
+            if (moveTriggerCollider != null)
+            {
+                // 負の数は割り当てられない
+                triggerAreaSize.x = triggerAreaSize.x > 0 ? triggerAreaSize.x : 0;
+                triggerAreaSize.y = triggerAreaSize.y > 0 ? triggerAreaSize.y : 0;
+
+                moveTriggerCollider.size = triggerAreaSize;
+                moveTriggerCollider.offset = triggerAreaPosition;
+            }
+        }
     }
 
     protected virtual void Start()
@@ -50,9 +67,6 @@ public class BaseObject : MonoBehaviour
 
         // まずは各コンポーネントの情報を取得
         rb = GetComponent<Rigidbody2D>();
-
-        // 範囲内に入ったら動き出す場合、Start関数内でやることは特になし
-        // movementTriggerType.HasFlag(MovementTrigger.AreaTrigger)
 
         // ゲーム開始時に動く設定にした場合、インスペクタの設定に従って適切に情報を反映
         if (movementTriggerType == MovementTrigger.GameStart)
@@ -166,5 +180,76 @@ public class BaseObject : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic; // 一定の力を与え続けるのでキネマティックオン
         rb.linearVelocity = moveSpeed;
         rb.sharedMaterial.bounciness = 0f; // 反発力を設定
+    }
+
+    private void OnDrawGizmos()
+    {
+        // 現在エディタで選択されているオブジェクト（またはその親）が自分自身か判定
+        if (!IsSelected()) return;
+
+        // 子要素にあるすべての Collider2D を取得（非アクティブも含む）
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>(true);
+
+        Gizmos.color = new Color(0.3f, 1.0f, 0.4f, 0.8f);
+
+        foreach (var col in colliders)
+        {
+            if (!col.enabled) continue;
+
+            // 1. BoxCollider2D (GroundCollider / DamageCollider / MoveTriggerCollider など)
+            if (col is BoxCollider2D box)
+            {
+                Gizmos.matrix = Matrix4x4.TRS(box.transform.position, box.transform.rotation, box.transform.lossyScale);
+                Gizmos.DrawWireCube(box.offset, box.size);
+                Gizmos.matrix = Matrix4x4.identity;
+            }
+            // 2. PolygonCollider2D
+            else if (col is PolygonCollider2D poly)
+            {
+                Vector2[] points = poly.points;
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Vector3 p1 = poly.transform.TransformPoint(points[i] + poly.offset);
+                    Vector3 p2 = poly.transform.TransformPoint(points[(i + 1) % points.Length] + poly.offset);
+                    Gizmos.DrawLine(p1, p2);
+                }
+            }
+            // 3. CircleCollider2D
+            else if (col is CircleCollider2D circle)
+            {
+                float radius = circle.radius * Mathf.Max(circle.transform.lossyScale.x, circle.transform.lossyScale.y);
+                Gizmos.DrawWireSphere(circle.transform.position + (Vector3)circle.offset, radius);
+            }
+        }
+    }
+
+    private bool IsSelected()
+    {
+#if UNITY_EDITOR
+        // 選択中のオブジェクトが存在しない場合は判定しない
+        if (UnityEditor.Selection.activeGameObject == null) return false;
+
+        // 現在選択されている GameObject の ID を取得
+        int selectedID = UnityEditor.Selection.activeGameObject.GetInstanceID();
+
+        // 1. 自分自身が直接選択されているか
+        if (selectedID == gameObject.GetInstanceID()) return true;
+
+        // 2. 選択されたオブジェクトが「自分自身」または「自分の配下（子・孫）」にあるか
+        // （Transform 階層を上に向かってたどり、自分が親にいれば true）
+        Transform t = UnityEditor.Selection.activeGameObject.transform;
+        while (t != null)
+        {
+            if (t.gameObject.GetInstanceID() == gameObject.GetInstanceID())
+            {
+                return true;
+            }
+            t = t.parent;
+        }
+
+        return false;
+#else
+    return false;
+#endif
     }
 }

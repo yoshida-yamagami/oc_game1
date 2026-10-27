@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>

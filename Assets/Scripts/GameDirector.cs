@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameDirector : MonoBehaviour
 {
@@ -17,6 +18,28 @@ public class GameDirector : MonoBehaviour
         gameClearText.SetActive(false);
         gameOverText.SetActive(false);
         restartButton.SetActive(false);
+
+        // ゲーム開始要件を満たしていない場合はゲーム進行不可
+        if (!Validate())
+        {
+            GameOver();
+        }
+    }
+
+    /// <summary>
+    /// ゲーム開始要件をチェック
+    /// </summary>
+    private bool Validate()
+    {
+        // 一つ以上ゴールタグのついたオブジェクトが存在することをチェック
+        GameObject goal = GameObject.FindWithTag("Goal");
+        if (goal == null)
+        {
+            return false;
+        }
+
+        // どこにも引っかからなければゲーム開始OK
+        return true;
     }
 
     void FixedUpdate()
