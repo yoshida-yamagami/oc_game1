@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerInput playerInput;
-    [SerializeField] GameObject gameOverText;
-    [SerializeField] GameObject gameClearText;
 
     private enum DIRECTION_TYPE
     {
@@ -274,13 +272,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    // ゲームオーバー時の処理
+    // ゲームクリア時の処理
     private void GameClear()
     {
         gameDirectorScript.GameClear();
 
         // 行動できないように制御
         canMove = false;
+
+        // 座標を固定
+        rb.linearVelocity = Vector3.zero;
+
+        // ゲームオーバー用のアニメーションを再生
+        animator.SetBool("IsClear", true);
     }
 
     // ゲームオーバー時の処理
@@ -290,5 +294,11 @@ public class Player : MonoBehaviour
 
         // 行動できないように制御
         canMove = false;
+
+        // 座標を固定
+        rb.linearVelocity = Vector3.zero;
+
+        // ゲームクリア用のアニメーションを再生
+        animator.SetBool("IsGameOver", true);
     }
 }
