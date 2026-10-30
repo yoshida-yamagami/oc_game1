@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
     [SerializeField] GameObject gameClearObject;        // ゲームクリア表示
     [SerializeField] GameObject gameOverObject;         // ゲームオーバー表示
     [SerializeField] GameObject restartButton;          // リスタートボタン
+    [SerializeField] GameObject nextButton;             // 次のステージへの遷移ボタン
     [SerializeField] UnityEngine.UI.Image errorMessage; // ゲーム開始不可表示
 
     private int resetCount = -1; // 非稼働時は-1。数値がセットされるとカウントダウン、0になるとシーンリセット実行
@@ -16,6 +18,7 @@ public class GameDirector : MonoBehaviour
         gameClearObject.SetActive(false);
         gameOverObject.SetActive(false);
         restartButton.SetActive(false);
+        nextButton.SetActive(false);
         errorMessage.gameObject.SetActive(false);
 
         // ゲーム開始要件をチェック
@@ -68,11 +71,16 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void GameClear()
     {
-        gameClearObject.SetActive(true);    // ゲームクリアの文字表示
-        restartButton.SetActive(true);      // リセットボタンを表示
-        // 次のステージシーンへの遷移ボタンを表示
+        gameClearObject.SetActive(true); // ゲームクリアの文字表示
+        restartButton.SetActive(true);   // リセットボタンを表示
+        nextButton.SetActive(true);      // 次のステージへの遷移ボタンを表示
+
         // 次のステージがない場合は遷移ボタンを無効化する（表示はしておく
-        // その場合、ボタンのテキストを「全クリ！」みたいにしようかな
+        if (GetNextSceneName() == null)
+        {
+            nextButton.GetComponent<Button>().interactable = false;
+            nextButton.transform.Find("NextButtonText").GetComponent<Text>().text = "全クリ！";
+        }
     }
 
     /// <summary>
@@ -87,41 +95,39 @@ public class GameDirector : MonoBehaviour
     /// <summary>
     /// 命名規則に従い、次のステージのシーン名を取得
     /// </summary>
-    /// <returns></returns>
+    /// <returns>次ステージがあればscene名を、なければnullを返す</returns>
     private string GetNextSceneName()
     {
-        // 1. 現在のシーン名を取得 (例: "Stage1")
+        // 次シーンの情報を得るため現シーンの情報を取得
+        int currentStageNumber;
         string currentSceneName = SceneManager.GetActiveScene().name;
-
-        // 2. 接頭辞 "Stage" を取り除いて数値部分だけに変換する (例: "1")
         string numberString = currentSceneName.Replace("Stage", "");
-
-        // 3. 数値に変換して +1 する
-        if (int.TryParse(numberString, out int currentStageNumber))
+        if (!int.TryParse(numberString, out currentStageNumber))
         {
-            int nextStageNumber = currentStageNumber + 1;
-            string nextSceneName = "Stage" + nextStageNumber; // 例: "Stage2"
-
-            // 4. 次のシーンが存在するかチェックして読み込む
-            if (Application.CanStreamedLevelBeLoaded(nextSceneName))
-            {
-                return nextSceneName;
-            }
-            else
-            {
-                // Stage10 をクリアした時など、次のシーンが無い場合の処理
-                return null;
-            }
+            // ステージ番号を得られない = 次シーンがない
+            Debug.LogError("シーン名からステージ番号を取得できませんでした: " + currentSceneName);
+            return null;
         }
 
-        Debug.LogError("シーン名からステージ番号を取得できませんでした: " + currentSceneName);
+        // 次シーン名を特定
+        int nextStageNumber = currentStageNumber + 1;
+        string nextSceneName = "Stage" + nextStageNumber;
+
+        // 次のシーンが存在するかチェックして読み込む
+        if (Application.CanStreamedLevelBeLoaded(nextSceneName))
+        {
+            // 次シーンが存在する場合はシーン名を返す
+            return nextSceneName;
+        }
+
+        // 次シーンが無い場合はnullを返す
         return null;
     }
 
     /// <summary>
     /// 次のシーンへの遷移処理
     /// </summary>
-    private void LoadNextStage()
+    public void LoadNextStage()
     {
         string nextSceneName = GetNextSceneName();
 
