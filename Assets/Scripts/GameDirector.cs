@@ -70,6 +70,9 @@ public class GameDirector : MonoBehaviour
     {
         gameClearObject.SetActive(true);    // ゲームクリアの文字表示
         restartButton.SetActive(true);      // リセットボタンを表示
+        // 次のステージシーンへの遷移ボタンを表示
+        // 次のステージがない場合は遷移ボタンを無効化する（表示はしておく
+        // その場合、ボタンのテキストを「全クリ！」みたいにしようかな
     }
 
     /// <summary>
@@ -79,5 +82,54 @@ public class GameDirector : MonoBehaviour
     {
         // 同じステージを最初から始める
         Initiate.Fade(SceneManager.GetActiveScene().name, Color.black, 1.0f);
+    }
+
+    /// <summary>
+    /// 命名規則に従い、次のステージのシーン名を取得
+    /// </summary>
+    /// <returns></returns>
+    private string GetNextSceneName()
+    {
+        // 1. 現在のシーン名を取得 (例: "Stage1")
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // 2. 接頭辞 "Stage" を取り除いて数値部分だけに変換する (例: "1")
+        string numberString = currentSceneName.Replace("Stage", "");
+
+        // 3. 数値に変換して +1 する
+        if (int.TryParse(numberString, out int currentStageNumber))
+        {
+            int nextStageNumber = currentStageNumber + 1;
+            string nextSceneName = "Stage" + nextStageNumber; // 例: "Stage2"
+
+            // 4. 次のシーンが存在するかチェックして読み込む
+            if (Application.CanStreamedLevelBeLoaded(nextSceneName))
+            {
+                return nextSceneName;
+            }
+            else
+            {
+                // Stage10 をクリアした時など、次のシーンが無い場合の処理
+                return null;
+            }
+        }
+
+        Debug.LogError("シーン名からステージ番号を取得できませんでした: " + currentSceneName);
+        return null;
+    }
+
+    /// <summary>
+    /// 次のシーンへの遷移処理
+    /// </summary>
+    private void LoadNextStage()
+    {
+        string nextSceneName = GetNextSceneName();
+
+        if (nextSceneName != null)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+
+        // 次のシーンがない場合は何もしない
     }
 }
