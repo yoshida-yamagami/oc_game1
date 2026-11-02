@@ -81,6 +81,22 @@ public class GameDirector : MonoBehaviour
             nextButton.GetComponent<Button>().interactable = false;
             nextButton.transform.Find("NextButtonText").GetComponent<Text>().text = "全クリ！";
         }
+
+        // BaseObjectをアタッチしている全てのオブジェクトの動きを停止する
+        FreezeAllBaseObjects();
+    }
+
+    /// <summary>
+    /// BaseObjectをアタッチしている全てのオブジェクトの動きを止める
+    /// </summary>
+    private void FreezeAllBaseObjects()
+    {
+        // 条件に合致するシーン内のアクティブなオブジェクトをすべて取得
+        BaseObject[] allBaseObjects = FindObjectsByType<BaseObject>(FindObjectsSortMode.None);
+        foreach (BaseObject obj in allBaseObjects)
+        {
+            obj.SetNoMove();
+        }
     }
 
     /// <summary>

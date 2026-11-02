@@ -237,6 +237,12 @@ public class Player : MonoBehaviour
     // 他のオブジェクトとの衝突判定
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 動けない状態なら判定をしない
+        if (!canMove)
+        {
+            return;
+        }
+
         // トラップとぶつかったらゲームオーバー
         if (collision.collider.gameObject.CompareTag("Trap"))
         {
@@ -248,6 +254,12 @@ public class Player : MonoBehaviour
     // 他のオブジェクトとの通過判定
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // 動けない状態なら判定をしない
+        if (!canMove)
+        {
+            return;
+        }
+
         // ゴールに接触したらゲームクリア
         if (collision.gameObject.tag == "Goal")
         {
@@ -282,6 +294,7 @@ public class Player : MonoBehaviour
 
         // 座標を固定
         rb.linearVelocity = Vector3.zero;
+        rb.bodyType = RigidbodyType2D.Static;
 
         // ゲームオーバー用のアニメーションを再生
         animator.SetBool("IsClear", true);
@@ -297,6 +310,7 @@ public class Player : MonoBehaviour
 
         // 座標を固定
         rb.linearVelocity = Vector3.zero;
+        rb.bodyType = RigidbodyType2D.Static;
 
         // ゲームクリア用のアニメーションを再生
         animator.SetBool("IsGameOver", true);

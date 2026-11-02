@@ -136,9 +136,10 @@ public class BaseObject : MonoBehaviour
     /// <summary>
     /// オブジェクトを移動しないように設定
     /// </summary>
-    private void SetNoMove()
+    public void SetNoMove()
     {
         // 動き出さない場合はその場に固定
+        isMove = false;
         rb.bodyType = RigidbodyType2D.Static;
     }
 
