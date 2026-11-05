@@ -71,19 +71,25 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void GameClear()
     {
+        // 共通処理
         gameClearObject.SetActive(true); // ゲームクリアの文字表示
         restartButton.SetActive(true);   // リセットボタンを表示
-        nextButton.SetActive(true);      // 次のステージへの遷移ボタンを表示
+        FreezeAllBaseObjects();          // BaseObjectをアタッチしている全てのオブジェクトの動きを停止する
 
-        // 次のステージがない場合は遷移ボタンを無効化する（表示はしておく
-        if (GetNextSceneName() == null)
+        // チュートリアルの場合はここまで
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName.Contains("Tutorial"))
         {
+            return;
+        }
+
+        // 次のステージへの遷移ボタンを表示
+        nextButton.SetActive(true);
+        if (GetNextSceneName() == null)
+        { // 次のステージがない場合は遷移ボタンを無効化する（表示はしておく
             nextButton.GetComponent<Button>().interactable = false;
             nextButton.transform.Find("NextButtonText").GetComponent<Text>().text = "全クリ！";
         }
-
-        // BaseObjectをアタッチしている全てのオブジェクトの動きを停止する
-        FreezeAllBaseObjects();
     }
 
     /// <summary>
