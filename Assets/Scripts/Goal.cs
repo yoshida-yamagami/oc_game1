@@ -14,8 +14,8 @@ public class Goal : BaseObject
             // ヒエラルキーに表示しない設定
             if (child.gameObject.name == "Aura" || child.gameObject.name == "Marker")
             {
-                child.gameObject.hideFlags = HideFlags.HideInHierarchy;
-                //child.gameObject.hideFlags = HideFlags.None; //表示したい場合はこの行を使用
+                //child.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                child.gameObject.hideFlags = HideFlags.None; //表示したい場合はこの行を使用
             }
         }
     }
