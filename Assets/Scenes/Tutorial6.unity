@@ -208,7 +208,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (1)
+      value: Square2
       objectReference: {fileID: 0}
     - target: {fileID: 2595719826618092381, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: squareSize.x
@@ -609,7 +609,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (7)
+      value: Square8
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -798,7 +798,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (3)
+      value: Square4
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -1218,7 +1218,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (8)
+      value: Square9
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -1677,7 +1677,7 @@ Transform:
   m_GameObject: {fileID: 1278765679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23659, y: 2.33156, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1826,7 +1826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (4)
+      value: Square5
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -2010,7 +2010,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (5)
+      value: Square6
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -2227,7 +2227,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (2)
+      value: Square3
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -2332,7 +2332,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (6)
+      value: Square7
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -2761,7 +2761,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 358751060611410549, guid: b94375a9b2523ed45bbe3e64651a42ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.46
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 358751060611410549, guid: b94375a9b2523ed45bbe3e64651a42ba, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2839,7 +2839,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square
+      value: Square1
       objectReference: {fileID: 0}
     - target: {fileID: 2595719826618092381, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: squareSize.x

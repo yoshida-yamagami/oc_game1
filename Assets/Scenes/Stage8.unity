@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (2)
+      value: Square3
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -512,7 +512,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.71
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -553,7 +553,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (1)
+      value: Square2
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8564860860126430870, guid: 93a9162492c060e47b1ee8ca893625ad, type: 3}
       propertyPath: m_Name
-      value: Trap (1)
+      value: Trap2
       objectReference: {fileID: 0}
     - target: {fileID: 8789429584172756952, guid: 93a9162492c060e47b1ee8ca893625ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1294,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8564860860126430870, guid: 93a9162492c060e47b1ee8ca893625ad, type: 3}
       propertyPath: m_Name
-      value: Trap
+      value: Trap1
       objectReference: {fileID: 0}
     - target: {fileID: 8789429584172756952, guid: 93a9162492c060e47b1ee8ca893625ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1713,7 +1713,7 @@ Transform:
   m_GameObject: {fileID: 1278765679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23659, y: 2.33156, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1729,7 +1729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square (3)
+      value: Square4
       objectReference: {fileID: 0}
     - target: {fileID: 2109476329166131383, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
@@ -2457,7 +2457,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -2.55}
+  m_Offset: {x: 0, y: -2.57}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2597,7 +2597,8 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 900737726182332579, guid: b94375a9b2523ed45bbe3e64651a42ba, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b94375a9b2523ed45bbe3e64651a42ba, type: 3}
@@ -2611,15 +2612,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 52844833037117359, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Name
-      value: Square
+      value: Square1
       objectReference: {fileID: 0}
     - target: {fileID: 2595719826618092381, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: squareSize.x
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3881655313020220201, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3881655313020220201, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2659,15 +2660,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4349884626268967708, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5755858590951172458, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8770387659493284224, guid: 050c78198a03a5f42a091b2899503ffa, type: 3}
       propertyPath: m_Size.x
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
