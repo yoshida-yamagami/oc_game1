@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     DIRECTION_TYPE direction = DIRECTION_TYPE.STOP;
     private const int NO_INPUT_TIME_COUNT = 3;
+    private const float JUMP_FORCE = 7f; // ジャンプボタンを押した際にy軸方向にかかる力
+    private const float MOVE_SPEED = 4.0f;
 
     private LayerMask groundLayer; // 床と認識するレイヤーを指定
     private GameDirector gameDirectorScript;
@@ -27,12 +29,12 @@ public class Player : MonoBehaviour
     private bool canMove = true; // 行動可否判定
 
     // 地面との当たり判定に使用
-    Vector3 groundCheckOffset = new Vector3(0.5f, 0.4f, 0); // 左右の幅0.3、下方向へ0.3
+    Vector3 groundCheckOffset = new Vector3(0.5f, 0.4f, 0);
     float groundCheckDistance = 0.3f; // デバッグ用の線の長さ指定
     private bool isGrounded; // 現在接地しているかどうかを保持する変数（Gizmosでの色分けに使用）
     private int noInputTime = 0; // ジャンプ直後の誤判定を防ぐため、入力受付不可時間を設定
 
-    private SpriteRenderer spriteRenderer; // ★追加
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -72,24 +74,23 @@ public class Player : MonoBehaviour
             return;
         }
 
+        // プレイヤーの向きから、プレイヤーの移動速度と画像の向きを設定
         switch (direction)
         {
             case DIRECTION_TYPE.STOP:
                 speed = 0;
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 3;
-                spriteRenderer.flipX = false; // ★修正（右を向く：反転なし）
-                //transform.localScale = new Vector3(1, 1, 1);
+                speed = MOVE_SPEED;
+                spriteRenderer.flipX = false; // 右を向く
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -3;
-                spriteRenderer.flipX = true;  // ★修正（左を向く：左右反転）
-                //transform.localScale = new Vector3(-1, 1, 1);
+                speed = -MOVE_SPEED;
+                spriteRenderer.flipX = true;  // 左を向く
                 break;
         }
 
-        // ★ 親（床）の速度を取得して合算する
+        // 床の上にいる場合、床の速度も加味してプレイヤーを動かす
         float parentVelocityX = 0f;
         if (transform.parent != null)
         {
@@ -128,6 +129,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ジャンプの判定
+    /// </summary>
     private void JudgeJump()
     {
         // 上昇中にボタンを離したら、速度を急減衰させる（小・中ジャンプになる）
@@ -143,13 +147,17 @@ public class Player : MonoBehaviour
         // ジャンプは地面に接している時のみ可能（2段ジャンプ防止）
         if (grounded && playerInput.actions["Jump"].WasPressedThisFrame())
         {
-            float jumpForce = 7f; // ジャンプボタンを押されたときに上方向に与える力
+            float jumpForce = JUMP_FORCE; // ジャンプボタンを押されたときに上方向に与える力
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             noInputTime = NO_INPUT_TIME_COUNT;
             return;
         }
     }
 
+    /// <summary>
+    /// プレイヤーが地面に接地しているかを判定
+    /// </summary>
+    /// <returns></returns>
     private bool IsGround()
     {
         Vector3 leftStart = transform.position + new Vector3(-groundCheckOffset.x, -groundCheckOffset.y, 0);
@@ -176,8 +184,7 @@ public class Player : MonoBehaviour
             grounded = hitL.collider != null || hitC.collider != null || hitR.collider != null;
         }
 
-        // --- 1. 判定時のみ色を変える (Debug.DrawLine) ---
-        // 接地していたら緑、浮いていたら赤
+        // 判定時のみ色を変える(接地：緑、非接地：赤)
         Color lineColor = grounded ? Color.green : Color.red;
         Debug.DrawLine(leftStart, leftEnd, lineColor);
         Debug.DrawLine(centerStart, centerEnd, lineColor);
@@ -186,8 +193,7 @@ public class Player : MonoBehaviour
         return grounded;
     }
 
-    // --- 2. Gizmos（ギズモ）を利用する ---
-    // このメソッドはUnityエディタ上で常に（再生していなくても）呼ばれます
+    // Gizmos（ギズモ）表示操作
     private void OnDrawGizmos()
     {
         // アプリケーションが動いていない時は白、動いている時は判定結果に合わせる
@@ -211,7 +217,10 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(rightStart, rightStart - Vector3.up * groundCheckDistance);
     }
 
-    // 外部（床）から呼び出して親子関係を制御する窓口
+    /// <summary>
+    /// プレイヤーをfloorTransformの子にする(床の動きがプレイヤーに影響するようになる)
+    /// </summary>
+    /// <param name="floorTransform"></param>
     public void SetPassengerOf(Transform floorTransform)
     {
         if (transform.parent != floorTransform)
@@ -220,6 +229,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーの親子関係をキャンセルする
+    /// </summary>
     public void ReleasePassenger()
     {
         if (transform.parent != null)
