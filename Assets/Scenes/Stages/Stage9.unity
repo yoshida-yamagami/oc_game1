@@ -4673,6 +4673,7 @@ MonoBehaviour:
   audioSource: {fileID: 2015425909}
   clearSeClip: {fileID: 8300000, guid: 40afee2866ae72644982cee37b11f304, type: 3}
   damageSeClip: {fileID: 8300000, guid: 8307f91db4573904c8d59c3803f78556, type: 3}
+  coinSeClip: {fileID: 8300000, guid: fcef56042fffec44c8614a03d3f142bb, type: 3}
 --- !u!61 &2015425904
 BoxCollider2D:
   m_ObjectHideFlags: 0

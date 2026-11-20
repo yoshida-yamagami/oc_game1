@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip clearSeClip;
     [SerializeField] private AudioClip damageSeClip;
+    [SerializeField] private AudioClip coinSeClip;
 
     private enum DIRECTION_TYPE
     {
@@ -129,6 +130,17 @@ public class Player : MonoBehaviour
         if (audioSource != null && clearSeClip != null)
         {
             audioSource.PlayOneShot(clearSeClip);
+        }
+    }
+
+    /// <summary>
+    /// コイン取得時のSE再生
+    /// </summary>
+    public void PlayCoinSE()
+    {
+        if (audioSource != null && coinSeClip != null)
+        {
+            audioSource.PlayOneShot(coinSeClip);
         }
     }
 
@@ -321,6 +333,7 @@ public class Player : MonoBehaviour
             // なので、コインを取る前にプレイヤーの親情報をリセット
             transform.SetParent(null);
             Destroy(collision.gameObject);
+            PlayCoinSE();
         }
     }
 
