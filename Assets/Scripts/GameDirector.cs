@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -22,10 +24,22 @@ public class GameDirector : MonoBehaviour
         errorMessage.gameObject.SetActive(false);
 
         // ゲーム開始要件をチェック
-        Validate();
+        if (!Validate())
+        {
+            return;
+        }
     }
 
-    void FixedUpdate()
+    private void Update()
+    {
+        // Escが押されたらゲーム終了
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            EndGame();
+        }
+    }
+
+    private void FixedUpdate()
     {
         if (resetCount > 0)
         {
@@ -93,6 +107,30 @@ public class GameDirector : MonoBehaviour
     }
 
     /// <summary>
+    /// 次のシーンへの遷移処理
+    /// </summary>
+    public void LoadNextStage()
+    {
+        string nextSceneName = GetNextSceneName();
+
+        if (nextSceneName != null)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+
+        // 次のシーンがない場合は何もしない
+    }
+
+    /// <summary>
+    /// リスタート処理
+    /// </summary>
+    public void Restart()
+    {
+        // 同じステージを最初から始める
+        Initiate.Fade(SceneManager.GetActiveScene().name, Color.black, 1.0f);
+    }
+
+    /// <summary>
     /// BaseObjectをアタッチしている全てのオブジェクトの動きを止める
     /// </summary>
     private void FreezeAllBaseObjects()
@@ -103,15 +141,6 @@ public class GameDirector : MonoBehaviour
         {
             obj.SetNoMove();
         }
-    }
-
-    /// <summary>
-    /// リスタート処理
-    /// </summary>
-    public void Restart()
-    {
-        // 同じステージを最初から始める
-        Initiate.Fade(SceneManager.GetActiveScene().name, Color.black, 1.0f);
     }
 
     /// <summary>
@@ -145,19 +174,16 @@ public class GameDirector : MonoBehaviour
         // 次シーンが無い場合はnullを返す
         return null;
     }
-
+    
     /// <summary>
-    /// 次のシーンへの遷移処理
+    /// ゲーム終了（プレイ停止）
     /// </summary>
-    public void LoadNextStage()
+    private void EndGame()
     {
-        string nextSceneName = GetNextSceneName();
-
-        if (nextSceneName != null)
-        {
-            SceneManager.LoadScene(nextSceneName);
-        }
-
-        // 次のシーンがない場合は何もしない
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 }

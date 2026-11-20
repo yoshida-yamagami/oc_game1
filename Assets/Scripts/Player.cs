@@ -9,6 +9,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerInput playerInput;
 
+    // SE再生用
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clearSeClip;
+    [SerializeField] private AudioClip damageSeClip;
+
     private enum DIRECTION_TYPE
     {
         STOP,
@@ -104,7 +109,29 @@ public class Player : MonoBehaviour
         // 自分の入力移動速度（speed）に床の移動速度（parentVelocityX）を加算
         rb.linearVelocity = new Vector2(speed + parentVelocityX, rb.linearVelocityY);
     }
-    
+
+    /// <summary>
+    /// 被ダメージ時のSE再生
+    /// </summary>
+    public void PlayDamageSE()
+    {
+        if (audioSource != null && damageSeClip != null)
+        {
+            audioSource.PlayOneShot(damageSeClip);
+        }
+    }
+
+    /// <summary>
+    /// クリア時のSE再生
+    /// </summary>
+    public void PlayClearSE()
+    {
+        if (audioSource != null && clearSeClip != null)
+        {
+            audioSource.PlayOneShot(clearSeClip);
+        }
+    }
+
     /// <summary>
     /// 水平方向の入力から、プレイヤーの方向を設定
     /// </summary>
@@ -276,6 +303,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             // ステージクリア処理
+            PlayClearSE();
             GameClear();
         }
 
