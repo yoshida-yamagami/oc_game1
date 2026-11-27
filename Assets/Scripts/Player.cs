@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -24,7 +23,7 @@ public class Player : MonoBehaviour
 
     DIRECTION_TYPE direction = DIRECTION_TYPE.STOP;
     private const int NO_INPUT_TIME_COUNT = 3;
-    private const float JUMP_FORCE = 7f; // ジャンプボタンを押した際にy軸方向にかかる力
+    private const float JUMP_FORCE = 0f; // ジャンプボタンを押した際にy軸方向にかかる力
     private const float MOVE_SPEED = 4.0f;
 
     private LayerMask groundLayer; // 床と認識するレイヤーを指定
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
     private float speed = 0;
     private bool canMove = true; // 行動可否判定
 
-    // 地面との当たり判定に使用
+    // 床との当たり判定に使用
     Vector3 groundCheckOffset = new Vector3(0.5f, 0.4f, 0);
     float groundCheckDistance = 0.3f; // デバッグ用の線の長さ指定
     private bool isGrounded; // 現在接地しているかどうかを保持する変数（Gizmosでの色分けに使用）
@@ -159,12 +158,12 @@ public class Player : MonoBehaviour
         else if (inputVector.x > 0)
         {
             // 右に動く
-            direction = DIRECTION_TYPE.RIGHT;
+
         }
         else if (inputVector.x < 0)
         {
             // 左に動く
-            direction = DIRECTION_TYPE.LEFT;
+
         }
     }
 
@@ -183,7 +182,7 @@ public class Player : MonoBehaviour
         bool grounded = IsGround();
 
         // ジャンプボタンを押されたら初速度を与える
-        // ジャンプは地面に接している時のみ可能（2段ジャンプ防止）
+        // ジャンプは床に接している時のみ可能（2段ジャンプ防止）
         if (grounded && playerInput.actions["Jump"].WasPressedThisFrame())
         {
             float jumpForce = JUMP_FORCE; // ジャンプボタンを押されたときに上方向に与える力
@@ -194,7 +193,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// プレイヤーが地面に接地しているかを判定
+    /// プレイヤーが床に接地しているかを判定
     /// </summary>
     /// <returns></returns>
     private bool IsGround()
@@ -232,7 +231,9 @@ public class Player : MonoBehaviour
         return grounded;
     }
 
-    // Gizmos（ギズモ）表示操作
+    /// <summary>
+    /// Gizmos（ギズモ）表示操作
+    /// </summary>
     private void OnDrawGizmos()
     {
         // アプリケーションが動いていない時は白、動いている時は判定結果に合わせる
@@ -279,13 +280,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    // 外部（トゲなど）から呼び出してダメージを受ける窓口
+    /// <summary>
+    /// 被ダメージ処理
+    /// </summary>
     public void TakeDamage()
     {
         GameOver(); // 既存のGameOverメソッドを呼び出す
     }
 
-    // 他のオブジェクトとの衝突判定
+    /// <summary>
+    /// 他のオブジェクトとの衝突判定
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 動けない状態なら判定をしない
@@ -302,7 +308,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    // 他のオブジェクトとの通過判定
+    /// <summary>
+    /// 他のオブジェクトとの通過判定
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 動けない状態なら判定をしない
@@ -337,7 +346,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    // ゲームクリア時の処理
+    /// <summary>
+    /// ゲームクリア時の処理
+    /// </summary>
     private void GameClear()
     {
         gameDirectorScript.GameClear();
@@ -353,7 +364,9 @@ public class Player : MonoBehaviour
         animator.SetBool("IsClear", true);
     }
 
-    // ゲームオーバー時の処理
+    /// <summary>
+    /// ゲームオーバー時の処理
+    /// </summary>
     private void GameOver()
     {
         gameDirectorScript.GameOver();
